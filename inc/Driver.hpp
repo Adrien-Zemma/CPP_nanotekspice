@@ -31,6 +31,8 @@ public:
 	Driver();
 	~Driver();
 	void shell();
+	void file_chipsettab(std::vector <std::map<std::string, std::string>> data);
+
 private:
 	void setclock();
 	void new_line();

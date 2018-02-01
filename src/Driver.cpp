@@ -31,12 +31,13 @@ Driver::Driver()
 
 Driver::~Driver(){}
 
-void file_chipsettab(std::vector <std::map<std::string, std::string>> data)
+void Driver::file_chipsettab(std::vector <std::map<std::string, std::string>> data)
 {
 	for (auto el : data)
-	{
+		for (auto el2: this->_available_chipset)
+			if (el2.first == el.first)
+				this->_tab_chipset[el2.first] = el2.second;
 
-	}
 }
 
 void Driver::shell()
