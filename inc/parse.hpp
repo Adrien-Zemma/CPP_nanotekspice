@@ -29,7 +29,8 @@ public:
 	std::vector<std::string> split_line(const std::string &line) const;
 
 private:
-	std::map<std::string, std::string>	*_data;
+	std::vector < std::map<std::string, std::string> > *_data;
+	//std::map<std::string, std::string>	*_data;
 	std::string				_file;
 };
 

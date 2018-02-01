@@ -9,20 +9,16 @@
 	#define ICOMPONENT_ABS_HPP_
 
 #include "IComponent.hpp"
+#include <vector>
 
 class IComponent_abs : public nts::IComponent
 {
 public:
-	void calculation();
-	nts::Tristate getOutput();
-	void setLink(std::map <std::string std::string> link);
+	void calculate();
 protected:
-	int 					_nb_pin;
-	std::string 				_name;
-	//std::map <std::string std::string>	_chipsets;
-	std::map <std::string nts::Tristate>	_input_status;
-	std::map <std::string std::string>	_link;
-	vector <nts::Tristate> 				_status_pin(20, UNDEFINED);
+	std::vector <nts::Tristate> _pin_status;
+	std::string _name;
+	nts::Tristate clock;
 };
 
 #endif /* !ICOMPONENT_ABS_HPP_ */
