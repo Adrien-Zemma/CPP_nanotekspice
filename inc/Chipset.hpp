@@ -19,8 +19,8 @@ public:
 	nts::Tristate 			getPin_value(int index);
 	void				setPin_value(int index, nts::Tristate);
 	void				setLink (std::size_t pin, nts::IComponent &other, std::size_t otherPin);
-	void				dump();
-	nts::Tristate				calculate();
+	void				dump() const;
+	nts::Tristate			calculate();
 
 protected:
 	std::vector <std::shared_ptr<nts::Tristate>>	_pin_status;
