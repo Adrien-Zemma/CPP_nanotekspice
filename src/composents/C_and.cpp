@@ -9,13 +9,18 @@
 
 C_and::C_and(){}
 
+nts::Tristate C_and::compute(std::size_t pin)
+{
+	return nts::UNDEFINED;
+}
+
 void C_and::_and(int index, int index2, int output)
 {
-	if (this->_pin_status[index] == nts::TRUE &&
-		 this->_pin_status[index2] == nts::TRUE)
-		this->_pin_status[output] = nts::TRUE;
+	if (this->getPin_value(index) == nts::TRUE &&
+		this->getPin_value(index2) == nts::TRUE)
+		this->setPin_value(output, nts::TRUE);
 	else 
-		this->_pin_status[output] = nts::FALSE;
+		this->setPin_value(output, nts::FALSE);
 }
 
 void C_and::calculate()

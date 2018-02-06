@@ -1,29 +1,38 @@
 NAME	= program
 
-CC	= g++
+CXX	= g++
 
 RM	= rm -f
 
-SRCS	= ./src/main.cpp \
+SRCS	= ./src/Driver.cpp \
+	  ./src/composents/C_and.cpp \
+	  ./src/main.cpp \
 	  ./src/parsing/parse.cpp 
 
 OBJS	= $(SRCS:.cpp=.o)
 
-CPPFLAGS = -I ./inc/
-CPPFLAGS += -I ./inc/composents
-CPPFLAGS += -W -Wall -Wextra
+CXXFLAGS = -I./inc/
+CXXFLAGS += -I./inc/composents/
+CXXFLAGS += -W -Wall -Wextra
+LDLIBS = 
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
-
+	@$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS) $(LDLIBS)
 clean:
-	$(RM) $(OBJS)
+	@echo -e "\033[1;46m clean OK \033[0m"
+	@$(RM) $(OBJS)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:
+	@echo -e "\033[1;46m fclean OK \033[0m"
+	@$(RM) $(OBJS)
+	@$(RM) $(NAME)
 
 re: fclean all
+
+%.o: %.cpp
+	@g++ -c -o $@ $(CXXFLAGS) $<
+	@echo -e "[\033[0;32m OK \033[0m] built '$@'"
 
 .PHONY: all clean fclean re
