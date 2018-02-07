@@ -9,9 +9,11 @@
 
 C_and::C_and(){}
 
-nts::Tristate C_and::calculate(int index)
+nts::Tristate C_and::calculate(std::size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output
 	*/
+	index = index;
+	return nts::UNDEFINED;
 }

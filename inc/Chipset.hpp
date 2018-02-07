@@ -13,15 +13,18 @@
 class Chipset :public nts::IComponent
 {
 public:
-	nts::Tristate			compute(std::size_t pin);
+	Chipset();
+	~Chipset();
+	virtual nts::Tristate		calculate(std::size_t pin) = 0;
+	nts::Tristate	compute(std::size_t pin);
 	std::shared_ptr<nts::Tristate>	getPin_ptr(int index);
-	void 				setPin_ptr(int, std::shared_ptr<nts::Tristate>);
+	void 				setPin_ptr(int index, 
+					std::shared_ptr<nts::Tristate> ptr);
 	nts::Tristate 			getPin_value(int index);
 	void				setPin_value(int index, nts::Tristate);
-	void				setLink (std::size_t pin, nts::IComponent &other, std::size_t otherPin);
+	void				setLink (std::size_t pin, 
+					nts::IComponent &other, std::size_t otherPin);
 	void				dump() const;
-	nts::Tristate			calculate();
-
 protected:
 	std::vector <std::shared_ptr<nts::Tristate>>	_pin_status;
 	std::vector<std::shared_ptr<nts::Tristate>>	_output;

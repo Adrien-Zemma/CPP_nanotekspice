@@ -7,17 +7,18 @@
 
 #include "Chipset.hpp"
 
-std::shared_ptr<nts::Tristate> Chipset::getPin_ptr(int index)
-{
-	return _pin_status[index];
-}
+Chipset::Chipset(){}
+
+Chipset::~Chipset(){}
 
 nts::Tristate	Chipset::compute(std::size_t pin)
 {
-		if (this->_output[pin] != nullptr)
-			return calculate();
-		else 
-			return *this->_pin_status[pin].get();
+	return this->calculate(pin);
+}
+
+std::shared_ptr<nts::Tristate> Chipset::getPin_ptr(int index)
+{
+	return _pin_status[index];
 }
 
 void	Chipset::setPin_ptr(int index, std::shared_ptr<nts::Tristate> status)
@@ -44,8 +45,6 @@ void Chipset::dump() const
 
 void	Chipset::setLink (std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 {
-	//TODO chercher dans le tableau de chipset;
-	//static_cast<Chipset>(other);
-	//this->_pin_status[pin] = other.getPin_ptr(otherPin);
+	this->_pin_status[pin] = other.getPin_ptr(otherPin);
 }
 

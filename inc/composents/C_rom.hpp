@@ -8,6 +8,14 @@
 #ifndef C_ROM_HPP_
 	#define C_ROM_HPP_
 
+#include "Chipset.hpp"
 
+class C_rom: public Chipset
+{
+public:
+	C_rom();
+private:
+	nts::Tristate calculate(int index);
+};
 
 #endif /* !C_ROM_HPP_ */

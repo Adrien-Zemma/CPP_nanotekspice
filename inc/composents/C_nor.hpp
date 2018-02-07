@@ -10,19 +10,14 @@
 #ifndef C_NOR_HPP_
 	#define C_NOR_HPP_
 
-class C_nor: public nts::IComponent
+#include "Chipset.hpp"
+
+class C_nor: public Chipset
 {
 public:
 	C_nor();
-	void	calculate();
-	nts::Tristate	compute(std::size_t pin);
-	void	setLink (std::size_t pin, nts::IComponent &other, std::size_t otherPin);
-	void	dump() const;
-	void	_nor(int index1, int index2, int output);
 private:
-	std::vector <std::shared_ptr<nts::Tristate>> _pin_status;
-	std::string			_name;
-	nts::Tristate 			_clock;
+	nts::Tristate calculate(int index);
 };
 
 #endif /* !C_NOR_HPP_ */

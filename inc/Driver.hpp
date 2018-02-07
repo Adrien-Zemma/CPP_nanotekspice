@@ -34,9 +34,6 @@ public:
 	Driver();
 	~Driver();
 	void	shell();
-	void	file_chipsettab(std::vector 
-		<std::map<std::string, std::string>> *data);
-	
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
 		 &value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat4008(const std::string
@@ -65,15 +62,16 @@ public:
 		 &value) const noexcept;
 
 private:
-	void	setclock();
-	void	new_line();
-	void	_exit();
-	void	display();
-	void 	simulate();
 	void 	loop();
 	void 	dump();
+	void	_exit();
+	void	display();
+	void	setclock();
+	void	new_line();
+	void 	simulate();
 	void 	fil_available_chipsettab();
 	void 	create_component_shell(std::string component, std::string name);
+	void	file_chipsettab(std::vector<std::map<std::string, std::string>> *data);
 	std::string	_command;
 	nts::Tristate	_clock;
 	std::string	_file;

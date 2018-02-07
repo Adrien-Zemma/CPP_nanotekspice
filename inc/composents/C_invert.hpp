@@ -8,6 +8,14 @@
 #ifndef C_INVERT_HPP_
 	#define C_INVERT_HPP_
 
+#include "Chipset.hpp"
 
+class C_invert: public Chipset
+{
+public:
+	C_invert();
+private:
+	nts::Tristate calculate(int index);
+};
 
 #endif /* !C_INVERT_HPP_ */

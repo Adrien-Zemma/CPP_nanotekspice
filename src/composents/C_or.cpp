@@ -9,33 +9,27 @@
 
 C_or::C_or(){}
 
-void C_nor::calculate()
+nts::Tristate C_or::calculate(int index)
 {
-	_or(1, 2, 3);
-	_or(5, 6, 4);
-	_or(8, 9, 10);
-	_or(12, 13, 11);
+	/*
+	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output
+	*/
+	index = index;
+	return nts::UNDEFINED;
 }
 
-nts::Tristate C_nor::compute(std::size_t pin)
-{
-	calculate();
-	return this->_pin_status[pin];
-}
+//nts::Tristate C_nor::calculate(int index)
+//{
+//	_or(1, 2, 3);
+//	_or(5, 6, 4);
+//	_or(8, 9, 10);
+//	_or(12, 13, 11);
+//}
 
-void C_nor::setLink (std::size_t pin, nts::IComponent &other, std::size_t otherPin)
-{
-}
-
-void C_nor::dump() const 
-{
-	std::cout << "dump" << std::endl;
-}
-
-void C_nor::_or(int index1, int index2, int index3)
-{
-	if (this->_pin_status[index1] == nts::FALSE && this->_pin_status[index2] == nts::FALSE)
-		this->_pin_status[index3] = nts::FALSE;
-	else 
-		this->_pin_status[index3] = nts::TRUE;
-}
+//void C_or::_or(int index1, int index2, int index3)
+//{
+//	if (this->_pin_status[index1] == nts::FALSE && this->_pin_status[index2] == nts::FALSE)
+//		this->_pin_status[index3] = nts::FALSE;
+//	else 
+//		this->_pin_status[index3] = nts::TRUE;
+//}

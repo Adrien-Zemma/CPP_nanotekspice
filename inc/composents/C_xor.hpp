@@ -8,6 +8,14 @@
 #ifndef C_XOR_HPP_
 	#define C_XOR_HPP_
 
+#include "Chipset.hpp"
 
+class C_xor: public Chipset
+{
+public:
+	C_xor();
+private:
+	nts::Tristate calculate(int index);
+};
 
 #endif /* !C_XOR_HPP_ */
