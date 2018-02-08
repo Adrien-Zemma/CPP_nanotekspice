@@ -8,11 +8,17 @@
 #ifndef C_AND_HPP_
 	#define C_AND_HPP_
 
-#include "IComponent_abs.hpp"
+#include "Chipset.hpp"
 
-class C_and: public IComponent_abs
+#define NB_PIN 20;
+
+class C_and: public Chipset
 {
-	void _and(int index, int index2, int output);
+public:
+	C_and();
+	nts::Tristate calculate(size_t index);
+
+private:
 };
 
 #endif /* !C_AND_HPP_ */

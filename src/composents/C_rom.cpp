@@ -5,11 +5,9 @@
 ** 
 */
 
-#include "C_and.hpp"
+#include "C_rom.hpp"
 
-C_and::C_and(){}
-
-nts::Tristate C_and::calculate(std::size_t index)
+nts::Tristate C_rom::calculate(int index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output
