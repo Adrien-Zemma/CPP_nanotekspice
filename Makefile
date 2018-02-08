@@ -8,18 +8,6 @@ SRCS	= ./src/Chipset.cpp \
 	  ./src/Driver.cpp \
 	  ./src/Pin.cpp \
 	  ./src/composents/C_and.cpp \
-	  ./src/composents/C_conter.cpp \
-	  ./src/composents/C_flip_flop.cpp \
-	  ./src/composents/C_four_added.cpp \
-	  ./src/composents/C_invert.cpp \
-	  ./src/composents/C_johnson.cpp \
-	  ./src/composents/C_nand.cpp \
-	  ./src/composents/C_nor.cpp \
-	  ./src/composents/C_or.cpp \
-	  ./src/composents/C_ram.cpp \
-	  ./src/composents/C_register.cpp \
-	  ./src/composents/C_rom.cpp \
-	  ./src/composents/C_xor.cpp \
 	  ./src/main.cpp \
 	  ./src/parsing/parse.cpp 
 

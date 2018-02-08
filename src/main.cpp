@@ -8,6 +8,8 @@ int main(int ac, char **av)
 		return 1;
 	Driver pilote;
 	Parse file(av[1]);
+	file.dumpChipsets();
+	file.dumpLinks();
 
 	file.read();
 }

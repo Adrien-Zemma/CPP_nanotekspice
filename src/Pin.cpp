@@ -12,5 +12,5 @@ Pin::~Pin(){}
 
 std::shared_ptr<nts::Tristate> Pin::getPin_ptr()
 {
-	return this->value;
+	return this->_value;
 }

@@ -22,7 +22,7 @@ Driver::~Driver(){}
 
 void Driver::fil_available_chipsettab()
 {
-	this->_available_chipset["4001"] = new C_nor();
+	/*this->_available_chipset["4001"] = new C_nor();
 	this->_available_chipset["4008"] = new C_four_added();
 	this->_available_chipset["4011"] = new C_nand();
 	this->_available_chipset["4013"] = new C_flip_flop();
@@ -30,11 +30,11 @@ void Driver::fil_available_chipsettab()
 	this->_available_chipset["4030"] = new C_xor();
 	this->_available_chipset["4040"] = new C_conter();
 	this->_available_chipset["4069"] = new C_invert();
-	this->_available_chipset["4071"] = new C_or();
+	this->_available_chipset["4071"] = new C_or();*/
 	this->_available_chipset["4081"] = new C_and();
-	this->_available_chipset["4094"] = new C_register();
+	/*this->_available_chipset["4094"] = new C_register();
 	this->_available_chipset["4514"] = new C_ram();
-	this->_available_chipset["2716"] = new C_rom();
+	this->_available_chipset["2716"] = new C_rom();*/
 }
 
 void Driver::file_chipsettab(std::vector <std::map<std::string, std::string>> *data)
@@ -55,7 +55,7 @@ void Driver::create_component_shell(std::string component, std::string name)
 	{
 		if (el.first == component)
 		{
-			_tab_chipset.push_back(el.second);
+			//_tab_chipset.push_back(el.second);
 			std::cout << name << " create" << std::endl;
 		}
 	}
@@ -98,13 +98,13 @@ void Driver::simulate()
 
 void Driver::dump()
 {
-	for(auto const& el: this->_tab_chipset)
-		el.get()->dump;
+	//for(auto const& el: this->_tab_chipset)
+		//el.get()->dump;
 }
 
 void Driver::prepar_pin()
 {
 	//TODO fill le tableau 
-	for (auto el : this->parse._data)
-	{}
+	//for (auto el : this->parse._data)
+	//{}
 }

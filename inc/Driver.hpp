@@ -15,6 +15,7 @@
 #include "IComponent.hpp"
 #include "Chipset.hpp"
 #include "Pin.hpp"
+#include "parse.hpp"
 #include "C_and.hpp"
 #include "C_conter.hpp"
 #include "C_flip_flop.hpp"
