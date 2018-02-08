@@ -26,8 +26,11 @@ public:
 	void read();
 	void read(std::string file);
 	std::vector<std::string> split_line(const std::string &line) const;
-
+	std::vector<std::string> split_args(const std::string &line) const;
+	void dumpLinks() const;
+	void dumpChipsets() const;
 	enum ParseTitle {
+		UNKONW,
 		CHIPSETS,
 		LINKS
 	};
@@ -35,10 +38,10 @@ public:
 private:
 	int count_args(const std::string line) const;
 	void append_line(std::string line);
-	void dumpChipsets() const;
 
-	std::map<std::string, std::string>		*_chipsets;
-	std::map<std::pair<std::string, size_t>, std::pair<std::string, size_t>>	*_links;
+	std::vector<std::pair<std::string, std::string>>		*_chipsets;
+	std::vector<std::pair<std::pair
+		<std::string, size_t>, std::pair<std::string, size_t>>>	*_links;
 	std::string				_file;
 	Parse::ParseTitle			_title;
 };

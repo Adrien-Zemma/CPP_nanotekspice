@@ -9,15 +9,17 @@
 Parse::Parse()
 	: _file("")
 {
-	_links = new std::map<std::pair<std::string, size_t>, std::pair<std::string, size_t>>;
-	_chipsets = new std::map<std::string, std::string>;
+	_links = new std::vector<std::pair<std::pair<std::string, size_t>, std::pair<std::string, size_t>>>;
+	_chipsets = new std::vector<std::pair<std::string, std::string>>;
+	_title = UNKONW;
 }
 
 Parse::Parse(const std::string &file)
 	: _file(file)
 {
-	_links = new std::map<std::pair<std::string, size_t>, std::pair<std::string, size_t>>;
-	_chipsets = new std::map<std::string, std::string>;
+	_links = new std::vector<std::pair<std::pair<std::string, size_t>, std::pair<std::string, size_t>>>;
+	_chipsets = new std::vector<std::pair<std::string, std::string>>;
+	_title = UNKONW;
 }
 
 Parse::~Parse()
@@ -52,18 +54,32 @@ void Parse::read(std::string file)
 		append_line(line);
 	}
 	dumpChipsets();
+	dumpLinks();
 }
 
 void Parse::append_line(std::string line)
 {
 	auto elems = split_line(line);
-	int args = count_args(line);
 
 	switch(_title) {
 		case CHIPSETS:
 		if (elems.size() == 2)
-			_chipsets->insert(std::pair<std::string,std::string>(elems[0], elems[1]));
+			_chipsets->push_back(std::pair<std::string,std::string>(elems[0], elems[1]));
+		break;
 		case LINKS:
+		if (elems.size() == 2) {
+			std::pair<std::string, size_t> first;
+			std::pair<std::string, size_t> second;
+			auto sub_elems = split_args(elems[0]);
+			if (sub_elems.size() == 2)
+				first = std::make_pair(sub_elems[0], std::stoi(sub_elems[1]));
+			sub_elems = split_args(elems[1]);			
+			if (sub_elems.size() == 2)
+				second = std::make_pair(sub_elems[0], std::stoi(sub_elems[1]));
+			_links->push_back(std::pair<std::pair<std::string, size_t>, std::pair<std::string, size_t>>(first, second));
+		}
+		break;
+		default:
 		break;
 	}
 }
@@ -105,9 +121,43 @@ std::vector<std::string> Parse::split_line(const std::string &line) const
 	return elems;
 }
 
+std::vector<std::string> Parse::split_args(const std::string &line) const
+{
+	std::vector<std::string> elems;
+	std::string el;
+
+	for (size_t i = 0; i < line.length(); i++) {
+		if (line[i] == '#') {
+			if (!el.empty())
+				elems.push_back(el);
+			return elems;
+		}
+		else if (line[i] == ':') {
+			if (!el.empty())
+				elems.push_back(el);
+			el.clear();
+		}
+		else
+			el += line[i];
+	}
+	if (!el.empty())
+		elems.push_back(el);
+	return elems;
+}
+
 void Parse::dumpChipsets() const
 {
-	for (const auto &it : _chipsets) {
-		std::cout << it.first << " => " << it.second << std::endl;
+	std::cout << "Dump Chipsets" << std::endl << std::endl;
+	for (const auto &it : *_chipsets) {
+        	std::cout << it.first << " => " << it.second << std::endl;
+	}
+}
+
+void Parse::dumpLinks() const
+{
+	std::cout << "Dump Links" << std::endl << std::endl;
+	for (const auto &it : *_links) {
+		std::cout << "[" <<it.first.first << " => " << it.first.second << "] => ";
+		std::cout << "[" <<it.second.first << " => " << it.second.second << "]" << std::endl << std::endl;
 	}
 }
