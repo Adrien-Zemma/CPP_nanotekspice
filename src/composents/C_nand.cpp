@@ -7,6 +7,9 @@
 
 #include "C_nand.hpp"
 
+C_nand::C_nand(){}
+C_nand::~C_nand(){}
+
 nts::Tristate C_nand::calculate(int index)
 {
 	/*

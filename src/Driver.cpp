@@ -22,19 +22,19 @@ Driver::~Driver(){}
 
 void Driver::fil_available_chipsettab()
 {
-	//this->_available_chipset["4001"] = new C_nor();
-	//this->_available_chipset["4008"] = new C_four_added();
-	//this->_available_chipset["4011"] = new C_nand();
-	//this->_available_chipset["4013"] = new C_flip_flop();
-	//this->_available_chipset["4017"] = new C_johnson();
-	//this->_available_chipset["4030"] = new C_xor();
-	//this->_available_chipset["4040"] = new C_conter();
-	//this->_available_chipset["4069"] = new C_invert();
-	//this->_available_chipset["4071"] = new C_or();
+	this->_available_chipset["4001"] = new C_nor();
+	this->_available_chipset["4008"] = new C_four_added();
+	this->_available_chipset["4011"] = new C_nand();
+	this->_available_chipset["4013"] = new C_flip_flop();
+	this->_available_chipset["4017"] = new C_johnson();
+	this->_available_chipset["4030"] = new C_xor();
+	this->_available_chipset["4040"] = new C_conter();
+	this->_available_chipset["4069"] = new C_invert();
+	this->_available_chipset["4071"] = new C_or();
 	this->_available_chipset["4081"] = new C_and();
-	//this->_available_chipset["4094"] = new C_register();
-	//this->_available_chipset["4514"] = new C_ram();
-	//this->_available_chipset["2716"] = new C_rom();*/
+	this->_available_chipset["4094"] = new C_register();
+	this->_available_chipset["4514"] = new C_ram();
+	this->_available_chipset["2716"] = new C_rom();
 }
 
 void Driver::file_chipsettab(std::vector <std::map<std::string, std::string>> *data)
@@ -55,7 +55,7 @@ void Driver::create_component_shell(std::string component, std::string name)
 	{
 		if (el.first == component)
 		{
-			this->_tab_chipset[name] = this->_available_chipset[component];
+			_tab_chipset.push_back(el.second);
 			std::cout << name << " create" << std::endl;
 		}
 	}
@@ -71,13 +71,14 @@ void Driver::shell()
 
 void Driver::new_line()
 {
-	std::cout << "> ";	
+	std::cout << "> ";
 	std::cin >> this->_command;
 }
 
 void Driver::loop()
 {
-	std::cout << "loop" << std::endl;
+	while(1)
+		this->simulate();
 }
 
 void Driver::_exit()
@@ -87,7 +88,7 @@ void Driver::_exit()
 
 void Driver::display()
 {
-	std::cout << "display" << std::endl;	
+	std::cout << "display" << std::endl;
 }
 
 void Driver::simulate()
@@ -97,5 +98,13 @@ void Driver::simulate()
 
 void Driver::dump()
 {
-	std::cout << "dump" << std::endl;
+	for(auto const& el: this->_tab_chipset)
+		el.get()->dump;
+}
+
+void Driver::prepar_pin()
+{
+	//TODO fill le tableau 
+	for (auto el : this->parse._data)
+	{}
 }

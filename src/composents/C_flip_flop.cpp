@@ -7,6 +7,10 @@
 
 #include "C_flip_flop.hpp"
 
+C_flip_flop::C_flip_flop(){}
+C_flip_flop::~C_flip_flop(){}
+
+
 nts::Tristate C_flip_flop::calculate(int index)
 {
 	/*

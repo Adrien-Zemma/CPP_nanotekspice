@@ -7,6 +7,9 @@
 
 #include "C_conter.hpp"
 
+C_conter::C_conter(){}
+C_conter::~C_conter(){}
+
 nts::Tristate C_conter::calculate(int index)
 {
 	/*

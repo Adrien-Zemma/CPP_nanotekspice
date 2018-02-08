@@ -7,6 +7,9 @@
 
 #include "C_xor.hpp"
 
+C_xor::C_xor(){}
+C_xor::~C_xor(){}
+
 nts::Tristate C_xor::calculate(int index)
 {
 	/*

@@ -8,6 +8,7 @@
 #include "C_four_added.hpp"
 
 C_four_added::C_four_added(){}
+C_four_added::~C_four_added(){}
 
 nts::Tristate C_four_added::calculate(int index)
 {

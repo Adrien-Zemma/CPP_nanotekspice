@@ -8,6 +8,7 @@
 #include "C_nor.hpp"
 
 C_nor::C_nor(){}
+C_nor::~C_nor(){}
 
 //void C_nor::calculate()
 //{

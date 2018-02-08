@@ -7,6 +7,9 @@
 
 #include "C_invert.hpp"
 
+C_invert::C_invert(){}
+C_invert::~C_invert(){}
+
 nts::Tristate C_invert::calculate(int index)
 {
 	/*

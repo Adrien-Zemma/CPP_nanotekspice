@@ -7,6 +7,9 @@
 
 #include "C_register.hpp"
 
+C_register::C_register(){}
+C_register::~C_register(){}
+
 nts::Tristate C_register::calculate(int index)
 {
 	/*

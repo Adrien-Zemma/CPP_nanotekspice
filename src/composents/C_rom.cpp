@@ -7,6 +7,9 @@
 
 #include "C_rom.hpp"
 
+C_rom::C_rom(){}
+C_rom::~C_rom(){}
+
 nts::Tristate C_rom::calculate(int index)
 {
 	/*

@@ -8,6 +8,7 @@
 #include "C_or.hpp"
 
 C_or::C_or(){}
+C_or::~C_or(){}
 
 nts::Tristate C_or::calculate(int index)
 {

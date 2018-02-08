@@ -7,6 +7,10 @@
 
 #include "C_johnson.hpp"
 
+C_johnson::C_johnson(){}
+C_johnson::~C_johnson(){}
+
+
 nts::Tristate C_johnson::calculate(int index)
 {
 	/*

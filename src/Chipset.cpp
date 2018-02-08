@@ -38,9 +38,11 @@ void	Chipset::setPin_value(int index, nts::Tristate value)
 
 void Chipset::dump() const
 {
-	int i = 0;
+	int i = 0;	
+	std::cout << "Composent :\t" << this->_name << std::endl;
 	for (auto el : this->_pin_status)
 		std::cout << "pin " << ++i << "value = \t" << el << std::endl;
+	std::cout << std::endl;
 }
 
 void	Chipset::setLink (std::size_t pin, nts::IComponent &other, std::size_t otherPin)

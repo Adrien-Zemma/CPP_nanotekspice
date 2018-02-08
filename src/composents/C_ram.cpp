@@ -7,6 +7,10 @@
 
 #include "C_ram.hpp"
 
+C_ram::C_ram(){}
+C_ram::~C_ram(){}
+
+
 nts::Tristate C_ram::calculate(int index)
 {
 	/*

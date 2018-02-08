@@ -35,7 +35,7 @@ public:
 	~Driver();
 	void	shell();
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
-		 &value) const noexcept;
+		&value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat4008(const std::string
 		 &value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat4011(const std::string
@@ -62,6 +62,7 @@ public:
 		 &value) const noexcept;
 
 private:
+	Parse	parse;
 	void 	loop();
 	void 	dump();
 	void	_exit();
@@ -71,15 +72,17 @@ private:
 	void 	simulate();
 	void 	fil_available_chipsettab();
 	void 	create_component_shell(std::string component, std::string name);
-	void	file_chipsettab(std::vector<std::map<std::string, std::string>> *data);
+	void	file_chipsettab(std::vector<std::map<std::string, 
+				std::string>> *data);
+	void	prepar_pin();
 	std::string	_command;
 	nts::Tristate	_clock;
 	std::string	_file;
-	std::map <std::string, void (Driver::*)()>		_tab_function;
-	std::map <std::string, nts::IComponent *>		_tab_chipset;
-	std::map <std::string, nts::IComponent *>		_available_chipset;
-	std::map <std::string, std::shared_ptr<nts::Tristate>>	_tab_input;
-	std::map <std::string, std::shared_ptr<nts::Tristate>>	_tab_output;
+	std::map <std::string, void (Driver::*)()>	_tab_function;
+	std::map <std::string, nts::IComponent *>	_available_chipset;
+	std::vector <std::unique_ptr<nts::IComponent>> _tab_chipset;
+	std::vector <Pin>	_tab_input;
+	std::vector <Pin>	_tab_output;
 };
 
 #endif /* !SHELL_HPP_ */
