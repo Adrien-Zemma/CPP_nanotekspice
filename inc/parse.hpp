@@ -13,8 +13,8 @@
 #include <map>
 #include <fstream>
 #include <iterator>
-#include <vector>
 #include <sstream>
+#include <vector>
 
 class Parse
 {
@@ -25,12 +25,22 @@ public:
 	
 	void read();
 	void read(std::string file);
-	std::map<std::string, std::string> *getData() const;
 	std::vector<std::string> split_line(const std::string &line) const;
 
+	enum ParseTitle {
+		CHIPSETS,
+		LINKS
+	};
+
 private:
-	std::map<std::string, std::string>	*_data;
+	int count_args(const std::string line) const;
+	void append_line(std::string line);
+	void dumpChipsets() const;
+
+	std::map<std::string, std::string>		*_chipsets;
+	std::map<std::pair<std::string, size_t>, std::pair<std::string, size_t>>	*_links;
 	std::string				_file;
+	Parse::ParseTitle			_title;
 };
 
 #endif /* !PARSE_HPP_ */
