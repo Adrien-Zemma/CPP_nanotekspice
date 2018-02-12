@@ -8,10 +8,9 @@
 #include "C_ram.hpp"
 
 C_ram::C_ram(){}
-C_ram::~C_ram(){}
 
 
-nts::Tristate C_ram::calculate(int index)
+nts::Tristate C_ram::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

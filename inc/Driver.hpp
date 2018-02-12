@@ -15,10 +15,11 @@
 #include "IComponent.hpp"
 #include "Chipset.hpp"
 #include "Pin.hpp"
-#include "parse.hpp"
+#include "Parse.hpp"
 #include "C_and.hpp"
 #include "C_conter.hpp"
 #include "C_flip_flop.hpp"
+#include "C_four_added.hpp"
 #include "C_invert.hpp"
 #include "C_johnson.hpp"
 #include "C_nand.hpp"
@@ -35,6 +36,7 @@ public:
 	Driver();
 	~Driver();
 	void	shell();
+	Parse	parse;	
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
 		&value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat4008(const std::string
@@ -63,7 +65,6 @@ public:
 		 &value) const noexcept;
 
 private:
-	Parse	parse;
 	void 	loop();
 	void 	dump();
 	void	_exit();
@@ -71,19 +72,28 @@ private:
 	void	setclock();
 	void	new_line();
 	void 	simulate();
+	void	fil_tab_factory();
 	void 	fil_available_chipsettab();
 	void 	create_component_shell(std::string component, std::string name);
-	void	file_chipsettab(std::vector<std::map<std::string, 
-				std::string>> *data);
-	void	prepar_pin();
+	void	fil_alltab();
+	bool	is_a_chipset(std::string);
+	void	make_link();
+	void	make_link2(std::pair <std::pair<std::string, size_t>, 
+	std::pair<std::string, size_t>> link, 
+	std::unique_ptr<nts::IComponent> &chipset);
+	std::unique_ptr<nts::IComponent>	*get_componont_from_name(std::string name);
+	nts::IComponent	&get_component_from_name(std::string name);
+	std::unique_ptr<nts::IComponent>	chipset_factory(std::string type,
+		std::string name);
 	std::string	_command;
 	nts::Tristate	_clock;
 	std::string	_file;
 	std::map <std::string, void (Driver::*)()>	_tab_function;
+	std::map <std::string, std::unique_ptr<nts::IComponent> (Driver::*)(const std::string &value) const noexcept>	_tab_factory;
 	std::map <std::string, nts::IComponent *>	_available_chipset;
-	std::vector <std::unique_ptr<nts::IComponent>> _tab_chipset;
-	std::vector <Pin>	_tab_input;
-	std::vector <Pin>	_tab_output;
+	std::vector <std::unique_ptr<nts::IComponent>>	_tab_chipset;
+	std::vector <std::unique_ptr<nts::IComponent>>	_tab_input;
+	std::vector <std::unique_ptr<nts::IComponent>>	_tab_output;
 };
 
 #endif /* !SHELL_HPP_ */

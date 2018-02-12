@@ -16,8 +16,7 @@ class C_nor: public Chipset
 {
 public:
 	C_nor();
-private:
-	nts::Tristate calculate(int index);
+	nts::Tristate calculate(size_t index);
 };
 
 #endif /* !C_NOR_HPP_ */

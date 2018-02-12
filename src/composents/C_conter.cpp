@@ -8,9 +8,8 @@
 #include "C_conter.hpp"
 
 C_conter::C_conter(){}
-C_conter::~C_conter(){}
 
-nts::Tristate C_conter::calculate(int index)
+nts::Tristate C_conter::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

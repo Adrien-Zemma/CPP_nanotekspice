@@ -15,7 +15,7 @@ class C_xor: public Chipset
 public:
 	C_xor();
 private:
-	nts::Tristate calculate(int index);
+	nts::Tristate calculate(size_t index);
 };
 
 #endif /* !C_XOR_HPP_ */

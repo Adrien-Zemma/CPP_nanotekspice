@@ -8,9 +8,8 @@
 #include "C_nand.hpp"
 
 C_nand::C_nand(){}
-C_nand::~C_nand(){}
 
-nts::Tristate C_nand::calculate(int index)
+nts::Tristate C_nand::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

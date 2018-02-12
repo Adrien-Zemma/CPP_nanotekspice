@@ -15,7 +15,7 @@ class C_rom: public Chipset
 public:
 	C_rom();
 private:
-	nts::Tristate calculate(int index);
+	nts::Tristate calculate(size_t index);
 };
 
 #endif /* !C_ROM_HPP_ */

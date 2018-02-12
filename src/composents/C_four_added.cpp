@@ -8,9 +8,8 @@
 #include "C_four_added.hpp"
 
 C_four_added::C_four_added(){}
-C_four_added::~C_four_added(){}
 
-nts::Tristate C_four_added::calculate(int index)
+nts::Tristate C_four_added::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output
@@ -49,3 +48,16 @@ void C_four_added::_added(int index1, int index2, int carry_in ,int output)
 //	_added(3, 2, 11, 12);
 //	_added(1, 15, 12, 13);
 //}
+
+
+
+/*
+
+	5 point notrze de 0 a 4
+	- qualiter presa
+	(comment on a fait le projet repartition des tahce)
+	- maintenabiliter (l'architecture / norme)
+	- organisation et methodologie (les commits repartition des tache / versionnigue)
+	- bonus
+	- test unitaire (pertinace)
+*/

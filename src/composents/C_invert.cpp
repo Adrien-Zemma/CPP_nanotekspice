@@ -8,9 +8,8 @@
 #include "C_invert.hpp"
 
 C_invert::C_invert(){}
-C_invert::~C_invert(){}
 
-nts::Tristate C_invert::calculate(int index)
+nts::Tristate C_invert::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

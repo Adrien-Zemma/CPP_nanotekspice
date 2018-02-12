@@ -15,7 +15,7 @@ class C_register: public Chipset
 public:
 	C_register();
 private:
-	nts::Tristate calculate(int index);
+	nts::Tristate calculate(size_t index);
 };
 
 #endif /* !C_REGISTER_HPP_ */

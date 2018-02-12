@@ -7,10 +7,17 @@
 
 #include "Pin.hpp"
 
-Pin::Pin(){}
-Pin::~Pin(){}
+Pin::Pin(std::string name){
+	this->_name = name;
+}
+// Pin::~Pin(){}
 
-std::shared_ptr<nts::Tristate> Pin::getPin_ptr()
+nts::Tristate	Pin::calculate(size_t pin)
 {
-	return this->_value;
+	return *this->_pin_status[pin].get();
+}
+
+std::shared_ptr<nts::Tristate> Pin::getPinPtr(size_t pin)
+{
+	return this->_pin_status[pin];
 }

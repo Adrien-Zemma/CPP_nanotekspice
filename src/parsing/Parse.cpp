@@ -4,7 +4,7 @@
 ** File description:
 ** 
 */
-#include "parse.hpp"
+#include "Parse.hpp"
 
 Parse::Parse()
 	: _file("")
@@ -26,6 +26,18 @@ Parse::~Parse()
 {
 	delete _links;
 	delete _chipsets;
+}
+
+std::vector<std::pair<std::pair
+		<std::string, size_t>, 
+		std::pair<std::string, size_t>>>	*Parse::getLink()
+{
+	return this->_links;
+}
+
+std::vector<std::pair<std::string, std::string>>		*Parse::getChipset()
+{
+	return this->_chipsets;
 }
 
 void Parse::read()
@@ -53,8 +65,6 @@ void Parse::read(std::string file)
 			_title = LINKS;
 		append_line(line);
 	}
-	dumpChipsets();
-	dumpLinks();
 }
 
 void Parse::append_line(std::string line)

@@ -8,9 +8,8 @@
 #include "C_rom.hpp"
 
 C_rom::C_rom(){}
-C_rom::~C_rom(){}
 
-nts::Tristate C_rom::calculate(int index)
+nts::Tristate C_rom::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

@@ -8,7 +8,6 @@
 #include "C_nor.hpp"
 
 C_nor::C_nor(){}
-C_nor::~C_nor(){}
 
 //void C_nor::calculate()
 //{
@@ -18,7 +17,7 @@ C_nor::~C_nor(){}
 //	_nor(12, 13, 11);
 //}
 
-nts::Tristate C_nor::calculate(int index)
+nts::Tristate	C_nor::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

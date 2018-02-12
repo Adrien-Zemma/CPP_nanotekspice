@@ -8,9 +8,8 @@
 #include "C_or.hpp"
 
 C_or::C_or(){}
-C_or::~C_or(){}
 
-nts::Tristate C_or::calculate(int index)
+nts::Tristate C_or::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

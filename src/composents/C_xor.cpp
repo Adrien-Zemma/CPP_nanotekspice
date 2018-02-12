@@ -8,9 +8,8 @@
 #include "C_xor.hpp"
 
 C_xor::C_xor(){}
-C_xor::~C_xor(){}
 
-nts::Tristate C_xor::calculate(int index)
+nts::Tristate C_xor::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

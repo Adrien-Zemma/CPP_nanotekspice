@@ -8,10 +8,9 @@
 #include "C_johnson.hpp"
 
 C_johnson::C_johnson(){}
-C_johnson::~C_johnson(){}
 
 
-nts::Tristate C_johnson::calculate(int index)
+nts::Tristate C_johnson::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

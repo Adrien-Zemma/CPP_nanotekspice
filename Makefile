@@ -1,4 +1,4 @@
-NAME	= program
+NAME	= notekspice
 
 CXX	= g++
 
@@ -8,14 +8,25 @@ SRCS	= ./src/Chipset.cpp \
 	  ./src/Driver.cpp \
 	  ./src/Pin.cpp \
 	  ./src/composents/C_and.cpp \
+	  ./src/composents/C_conter.cpp \
+	  ./src/composents/C_flip_flop.cpp \
+	  ./src/composents/C_four_added.cpp \
+	  ./src/composents/C_invert.cpp \
+	  ./src/composents/C_johnson.cpp \
+	  ./src/composents/C_nand.cpp \
+	  ./src/composents/C_nor.cpp \
+	  ./src/composents/C_or.cpp \
+	  ./src/composents/C_ram.cpp \
+	  ./src/composents/C_register.cpp \
+	  ./src/composents/C_rom.cpp \
+	  ./src/composents/C_xor.cpp \
 	  ./src/main.cpp \
-	  ./src/parsing/parse.cpp 
+	  ./src/parsing/Parse.cpp 
 
 OBJS	= $(SRCS:.cpp=.o)
 
 CXXFLAGS = -I./inc/
 CXXFLAGS += -I./inc/composents
-CXXFLAGS += -W -Wall -Wextra
 LDLIBS = 
 
 all: $(NAME)
@@ -34,7 +45,7 @@ fclean:
 re: fclean all
 
 %.o: %.cpp
-	@g++ -c -o $@ $(CXXFLAGS) $<
+	@$(CXX) -c -o $@ $(CXXFLAGS) $<
 	@echo -e "[\033[0;32m OK \033[0m] built '$@'"
 
 .PHONY: all clean fclean re

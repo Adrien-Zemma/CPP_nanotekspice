@@ -16,9 +16,8 @@ class C_and: public Chipset
 {
 public:
 	C_and();
+	virtual ~C_and() {};
 	nts::Tristate calculate(size_t index);
-
-private:
 };
 
 #endif /* !C_AND_HPP_ */
