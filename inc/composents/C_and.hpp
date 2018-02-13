@@ -10,8 +10,6 @@
 
 #include "Chipset.hpp"
 
-#define NB_PIN 20;
-
 class C_and: public Chipset
 {
 public:

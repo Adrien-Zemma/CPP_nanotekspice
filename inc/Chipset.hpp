@@ -7,13 +7,14 @@
 
 #ifndef CHIPSET_HPP_
 	#define CHIPSET_HPP_
-
+	
+#define NB_PIN 20;
 #include "IComponent.hpp"
 
 class Chipset :public nts::IComponent
 {
 public:
-	Chipset() {};
+	Chipset();
 	virtual ~Chipset() {};
 	virtual nts::Tristate	calculate(std::size_t pin) = 0;
 	virtual std::shared_ptr<nts::Tristate>	getPinPtr(int index);

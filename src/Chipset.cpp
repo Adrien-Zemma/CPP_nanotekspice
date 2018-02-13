@@ -7,6 +7,12 @@
 
 #include "Chipset.hpp"
 
+Chipset::Chipset()
+{
+	for(int i = 0; i <= 20 ; i++)
+		_pin_status.push_back(std::shared_ptr<nts::Tristate>(new nts::Tristate(nts::UNDEFINED)));
+}
+
 nts::Tristate	Chipset::compute(std::size_t pin)
 {
 	return this->calculate(pin);
@@ -37,12 +43,12 @@ void	Chipset::setPinValue(int index, nts::Tristate value)
 	*_pin_status[index] = value;
 }
 
-void Chipset::dump() const
+void	Chipset::dump() const
 {
-	int i = 0;	
+	int i = -1;
 	std::cout << "Composent :\t" << this->_name << std::endl;
 	for (auto el : this->_pin_status)
-		std::cout << "pin " << ++i << "value = \t" << *el.get() << std::endl;
+		std::cout << "pin " << ++i << " value = \t" << *el.get() << std::endl;
 	std::cout << std::endl;
 }
 

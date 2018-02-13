@@ -65,25 +65,24 @@ public:
 		 &value) const noexcept;
 
 private:
-	void	init();
+	void	_init();
 	void 	loop();
 	void 	dump();
 	void	_exit();
 	void	display();
 	void	setclock();
-	void	new_line();
+	void	newLine();
 	void 	simulate();
-	void	fil_tab_factory();//done
-	void 	fil_available_chipsettab(); //done
-	void	init();
-	bool	is_a_chipset(std::string);
-	void	make_link();
-	void	make_link2(std::pair <std::pair<std::string, size_t>, 
+	void	dumpAll();
+	void	filTabFactory();//done
+	void 	filAvailableChipsetTab(); //done
+	bool	isAChipset(std::string);
+	void	makeLink();
+	void	makeLink2(std::pair <std::pair<std::string, size_t>, 
 	std::pair<std::string, size_t>> link, 
 	std::unique_ptr<nts::IComponent> &chipset);
-	std::unique_ptr<nts::IComponent>	*get_componont_from_name(std::string name);
-	nts::IComponent	&get_component_from_name(std::string name);
-	std::unique_ptr<nts::IComponent>	chipset_factory(std::string type,
+	nts::IComponent	&getComponentFromName(std::string name);
+	std::unique_ptr<nts::IComponent>	chipsetFactory(std::string type,
 		std::string name);
 	std::string	_command;
 	nts::Tristate	_clock;

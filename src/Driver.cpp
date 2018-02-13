@@ -14,13 +14,13 @@ Driver::Driver()
 	this->_tab_function["display"] = &Driver::display;
 	this->_tab_function["simulate"] = &Driver::simulate;
 	this->_tab_function["dump"] = &Driver::dump;
-	fil_available_chipsettab();
-	fil_tab_factory();
+	filAvailableChipsetTab();
+	filTabFactory();
 }
 
 Driver::~Driver(){}
 
-void	Driver::fil_tab_factory()
+void	Driver::filTabFactory()
 {
 	this->_tab_factory["4001"] = &Driver::creat4001;
 	this->_tab_factory["4008"] = &Driver::creat4008;
@@ -37,7 +37,7 @@ void	Driver::fil_tab_factory()
 	this->_tab_factory["2716"] = &Driver::creat2716;
 }
 
-void Driver::fil_available_chipsettab()
+void Driver::filAvailableChipsetTab()
 {
 	this->_available_chipset["4001"] = new C_nor();
 	this->_available_chipset["4008"] = new C_four_added();
@@ -54,7 +54,7 @@ void Driver::fil_available_chipsettab()
 	this->_available_chipset["2716"] = new C_rom();
 }
 
-bool	Driver::is_a_chipset(std::string name)
+bool	Driver::isAChipset(std::string name)
 {
 	for (auto el : this->_available_chipset)
 	{
@@ -64,23 +64,22 @@ bool	Driver::is_a_chipset(std::string name)
 	return false;
 }
 
-void Driver::init()
+void Driver::_init()
 {
 	std::vector<std::pair<std::string, std::string>> *chipset = parse.getChipset();
 
 	for (auto &el: *chipset)
 	{
-		std::cout << el.first << "\t" << el.second << std::endl;
 		if (el.first == "input")
 			this->_tab_input.push_back(std::unique_ptr<nts::IComponent>(new Pin(el.second)));
 		else if (el.first == "output")
 			this->_tab_output.push_back(std::unique_ptr<nts::IComponent>(new Pin(el.second)));
-		else if (is_a_chipset(el.first))
-			this->_tab_chipset.push_back(chipset_factory(el.first, el.second));
+		else if (isAChipset(el.first))
+			this->_tab_chipset.push_back(chipsetFactory(el.first, el.second));
 	}
 }
 
-std::unique_ptr<nts::IComponent>	Driver::chipset_factory(std::string type,
+std::unique_ptr<nts::IComponent>	Driver::chipsetFactory(std::string type,
 	std::string name)
 {
 	for (auto &el : this->_tab_factory)
@@ -93,15 +92,10 @@ std::unique_ptr<nts::IComponent>	Driver::chipset_factory(std::string type,
 	return nullptr;
 }
 
-void	Driver::init()
-{
-
-}
-
 void Driver::shell()
 {
-	this->init();
-	this->new_line();
+	this->_init();
+	this->newLine();
 	for (auto el = _tab_function.begin(); el != _tab_function.end(); ++el)
 		if (el->first == _command) {
 			(this->*el->second)();
@@ -109,7 +103,7 @@ void Driver::shell()
 		}
 }
 
-void Driver::new_line()
+void Driver::newLine()
 {
 	std::cout << "> ";
 	std::cin >> this->_command;
@@ -221,7 +215,7 @@ std::unique_ptr<nts::IComponent>	Driver::creat2716(const std::string
 	return std::unique_ptr<nts::IComponent>(new C_rom());
 }
 
-void Driver::make_link()
+void Driver::makeLink()
 {
 	std::vector<std::pair 
 		<std::pair<std::string, size_t>, 
@@ -229,15 +223,15 @@ void Driver::make_link()
 	for (auto &el : *tmp)
 	{
 		for(auto &it : _tab_chipset)
-			make_link2(el, it);
+			makeLink2(el, it);
 		for (auto &it : this->_tab_input)
-			make_link2(el, it);
+			makeLink2(el, it);
 		for (auto &it : this->_tab_output)
-			make_link2(el, it);
+			makeLink2(el, it);
 	}
 }
 
-nts::IComponent &Driver::get_component_from_name(std::string name)
+nts::IComponent &Driver::getComponentFromName(std::string name)
 {
 	for(auto &el: this->_tab_chipset)
 		if (el->getName() == name)
@@ -245,13 +239,13 @@ nts::IComponent &Driver::get_component_from_name(std::string name)
 	return *this->_tab_chipset[0];
 }
 
-void	Driver::make_link2(std::pair <std::pair<std::string, size_t>, 
+void	Driver::makeLink2(std::pair <std::pair<std::string, size_t>, 
 	std::pair<std::string, size_t>> link, 
 	std::unique_ptr<nts::IComponent> &chipset)
 {
 	if (link.first.first == chipset->getName())
 	{
 		chipset->setLink(link.second.second,
-			get_component_from_name(link.first.first), link.first.second);
+			getComponentFromName(link.first.first), link.first.second);
 	}
 }
