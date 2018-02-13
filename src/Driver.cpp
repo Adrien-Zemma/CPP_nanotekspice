@@ -64,8 +64,9 @@ bool	Driver::isAChipset(std::string name)
 	return false;
 }
 
-void Driver::_init()
+void Driver::_init(char *file)
 {
+	parse.read(file);
 	std::vector<std::pair<std::string, std::string>> *chipset = parse.getChipset();
 
 	for (auto &el: *chipset)

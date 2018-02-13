@@ -36,7 +36,7 @@ public:
 	Driver();
 	~Driver();
 	void	shell();
-	void	_init();	
+	void	_init(char *file);	
 	Parse	parse;	
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
 		&value) const noexcept;
