@@ -94,13 +94,14 @@ std::unique_ptr<nts::IComponent>	Driver::chipsetFactory(std::string type,
 
 void Driver::shell()
 {
-	this->_init();
-	this->newLine();
-	for (auto el = _tab_function.begin(); el != _tab_function.end(); ++el)
-		if (el->first == _command) {
-			(this->*el->second)();
-			return ;
-		}
+	while(1)
+	{
+		this->newLine();
+		for(auto &el : _tab_function)
+			if (el.first == _command) {
+				(this->*el.second)();
+			}
+	}
 }
 
 void Driver::newLine()
@@ -117,7 +118,9 @@ void Driver::loop()
 
 void Driver::_exit()
 {
+
 	std::cout << "exit" << std::endl;
+	exit(0);
 }
 
 void Driver::display()
@@ -127,7 +130,10 @@ void Driver::display()
 
 void Driver::simulate()
 {
-	std::cout << "simulate" << std::endl;
+	for (auto &el : this->_tab_chipset)
+		for(size_t i = 0; i<= 20; i++)
+			el->compute(i);
+	std::cout << "simulate over" << std::endl;
 }
 
 void Driver::dump()

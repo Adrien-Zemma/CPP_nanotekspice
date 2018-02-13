@@ -36,6 +36,7 @@ public:
 	Driver();
 	~Driver();
 	void	shell();
+	void	_init();	
 	Parse	parse;	
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
 		&value) const noexcept;
@@ -65,7 +66,6 @@ public:
 		 &value) const noexcept;
 
 private:
-	void	_init();
 	void 	loop();
 	void 	dump();
 	void	_exit();
