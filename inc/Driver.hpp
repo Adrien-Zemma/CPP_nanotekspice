@@ -65,6 +65,7 @@ public:
 		 &value) const noexcept;
 
 private:
+	void	init();
 	void 	loop();
 	void 	dump();
 	void	_exit();
@@ -72,10 +73,9 @@ private:
 	void	setclock();
 	void	new_line();
 	void 	simulate();
-	void	fil_tab_factory();
-	void 	fil_available_chipsettab();
-	void 	create_component_shell(std::string component, std::string name);
-	void	fil_alltab();
+	void	fil_tab_factory();//done
+	void 	fil_available_chipsettab(); //done
+	void	init();
 	bool	is_a_chipset(std::string);
 	void	make_link();
 	void	make_link2(std::pair <std::pair<std::string, size_t>, 

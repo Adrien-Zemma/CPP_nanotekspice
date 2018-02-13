@@ -33,5 +33,6 @@ namespace	nts
 		virtual void				setName(std::string name) = 0;
 	};
 }
+std::ostream &operator<<(std::ostream &s, const nts::Tristate &o);
 
 #endif /* !ICOMPONENT_HPP_ */

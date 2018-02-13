@@ -6,6 +6,5 @@ int main(int ac, char **av)
 		return 1;
 	Driver pilote;
 	pilote.parse.read(av[1]);
-	pilote.parse.dumpChipsets();
-	pilote.parse.dumpLinks();
+	pilote.shell();
 }

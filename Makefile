@@ -1,4 +1,4 @@
-NAME	= notekspice
+NAME	= nanotekspice
 
 CXX	= g++
 
@@ -27,6 +27,8 @@ OBJS	= $(SRCS:.cpp=.o)
 
 CXXFLAGS = -I./inc/
 CXXFLAGS += -I./inc/composents
+CXXFLAGS += -W -Wextra -Werror
+CXXFLAGS += -g3
 LDLIBS = 
 
 all: $(NAME)

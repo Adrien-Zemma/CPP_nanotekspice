@@ -1,3 +1,5 @@
 test/*
 .vscode/*
 *.o
+vgcore*
+nanotekspice

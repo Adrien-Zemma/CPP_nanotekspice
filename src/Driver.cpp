@@ -64,14 +64,15 @@ bool	Driver::is_a_chipset(std::string name)
 	return false;
 }
 
-void Driver::fil_alltab()
+void Driver::init()
 {
 	std::vector<std::pair<std::string, std::string>> *chipset = parse.getChipset();
 
 	for (auto &el: *chipset)
 	{
+		std::cout << el.first << "\t" << el.second << std::endl;
 		if (el.first == "input")
-			this->_tab_input.push_back(std::unique_ptr<nts::IComponent>( new Pin(el.second)));
+			this->_tab_input.push_back(std::unique_ptr<nts::IComponent>(new Pin(el.second)));
 		else if (el.first == "output")
 			this->_tab_output.push_back(std::unique_ptr<nts::IComponent>(new Pin(el.second)));
 		else if (is_a_chipset(el.first))
@@ -92,12 +93,20 @@ std::unique_ptr<nts::IComponent>	Driver::chipset_factory(std::string type,
 	return nullptr;
 }
 
+void	Driver::init()
+{
+
+}
+
 void Driver::shell()
 {
+	this->init();
 	this->new_line();
 	for (auto el = _tab_function.begin(); el != _tab_function.end(); ++el)
-		if (el->first == _command)
+		if (el->first == _command) {
 			(this->*el->second)();
+			return ;
+		}
 }
 
 void Driver::new_line()
