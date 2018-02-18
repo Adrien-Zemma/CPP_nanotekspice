@@ -7,7 +7,10 @@
 
 #include "C_or.hpp"
 
-C_or::C_or(){}
+C_or::C_or()
+{
+	this->_type = CHIPSETS;
+}
 
 nts::Tristate C_or::calculate(size_t index)
 {

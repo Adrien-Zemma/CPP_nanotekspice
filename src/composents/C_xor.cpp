@@ -7,7 +7,10 @@
 
 #include "C_xor.hpp"
 
-C_xor::C_xor(){}
+C_xor::C_xor()
+{
+	this->_type = CHIPSETS;
+}
 
 nts::Tristate C_xor::calculate(size_t index)
 {

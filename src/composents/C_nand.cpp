@@ -7,7 +7,10 @@
 
 #include "C_nand.hpp"
 
-C_nand::C_nand(){}
+C_nand::C_nand()
+{
+	this->_type = CHIPSETS;
+}
 
 nts::Tristate C_nand::calculate(size_t index)
 {

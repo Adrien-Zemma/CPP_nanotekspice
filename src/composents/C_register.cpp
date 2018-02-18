@@ -7,7 +7,10 @@
 
 #include "C_register.hpp"
 
-C_register::C_register(){}
+C_register::C_register()
+{
+	this->_type = CHIPSETS;
+}
 
 nts::Tristate C_register::calculate(size_t index)
 {

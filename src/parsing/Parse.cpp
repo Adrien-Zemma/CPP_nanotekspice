@@ -28,6 +28,16 @@ Parse::~Parse()
 	delete _chipsets;
 }
 
+std::string	Parse::clear(std::string str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (str[i] == ' ' || str[i] == '\t')
+			str.erase(i, 1);
+	}
+	return str;
+}
+
 std::vector<std::pair<std::pair
 		<std::string, size_t>, 
 		std::pair<std::string, size_t>>>	*Parse::getLink()

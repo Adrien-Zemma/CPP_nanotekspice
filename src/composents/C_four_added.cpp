@@ -7,7 +7,10 @@
 
 #include "C_four_added.hpp"
 
-C_four_added::C_four_added(){}
+C_four_added::C_four_added()
+{
+	this->_type = CHIPSETS;
+}
 
 nts::Tristate C_four_added::calculate(size_t index)
 {

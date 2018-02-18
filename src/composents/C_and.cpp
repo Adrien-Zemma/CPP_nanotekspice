@@ -7,7 +7,11 @@
 
 #include "C_and.hpp"
 
-C_and::C_and(){}
+C_and::C_and()
+{
+	this->_type = CHIPSETS;
+	this->_pinMax = 13;
+}
 
 nts::Tristate C_and::calculate(std::size_t index)
 {

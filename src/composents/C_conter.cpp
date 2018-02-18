@@ -7,7 +7,10 @@
 
 #include "C_conter.hpp"
 
-C_conter::C_conter(){}
+C_conter::C_conter()
+{
+	this->_type = CHIPSETS;
+}
 
 nts::Tristate C_conter::calculate(size_t index)
 {

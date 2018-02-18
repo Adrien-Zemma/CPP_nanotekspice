@@ -7,7 +7,10 @@
 
 #include "C_invert.hpp"
 
-C_invert::C_invert(){}
+C_invert::C_invert()
+{
+	this->_type = CHIPSETS;
+}
 
 nts::Tristate C_invert::calculate(size_t index)
 {

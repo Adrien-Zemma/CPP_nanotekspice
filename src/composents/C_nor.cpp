@@ -7,7 +7,10 @@
 
 #include "C_nor.hpp"
 
-C_nor::C_nor(){}
+C_nor::C_nor()
+{
+	this->_type = CHIPSETS;
+}
 
 //void C_nor::calculate()
 //{

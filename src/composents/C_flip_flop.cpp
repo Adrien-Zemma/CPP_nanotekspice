@@ -7,7 +7,10 @@
 
 #include "C_flip_flop.hpp"
 
-C_flip_flop::C_flip_flop(){}
+C_flip_flop::C_flip_flop()
+{
+	this->_type = CHIPSETS;
+}
 
 nts::Tristate C_flip_flop::calculate(size_t index)
 {

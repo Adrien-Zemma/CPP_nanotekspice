@@ -31,6 +31,11 @@ namespace	nts
 		virtual std::string	getName() = 0;
 		virtual std::shared_ptr<nts::Tristate>	getPinPtr(int index) = 0;
 		virtual void				setName(std::string name) = 0;
+		virtual void	setPinValue(int index, nts::Tristate) = 0;
+		virtual void	setPinValue(int index, std::string value) = 0;
+		virtual	size_t	getPinMax() = 0;
+		virtual	nts::Tristate	getPinValue(int index) = 0;
+		virtual void	setPinPtr(int index, std::shared_ptr<nts::Tristate> status) = 0;
 	};
 }
 std::ostream &operator<<(std::ostream &s, const nts::Tristate &o);

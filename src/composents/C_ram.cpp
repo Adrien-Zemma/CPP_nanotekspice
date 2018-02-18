@@ -7,7 +7,10 @@
 
 #include "C_ram.hpp"
 
-C_ram::C_ram(){}
+C_ram::C_ram()
+{
+	this->_type = CHIPSETS;
+}
 
 
 nts::Tristate C_ram::calculate(size_t index)

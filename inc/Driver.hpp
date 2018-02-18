@@ -37,7 +37,8 @@ public:
 	~Driver();
 	void	shell();
 	void	_init(char *file);	
-	Parse	parse;	
+	Parse	parse;
+private:
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
 		&value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat4008(const std::string
@@ -64,8 +65,6 @@ public:
 		 &value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat2716(const std::string
 		 &value) const noexcept;
-
-private:
 	void 	loop();
 	void 	dump();
 	void	_exit();
@@ -74,17 +73,20 @@ private:
 	void	newLine();
 	void 	simulate();
 	void	dumpAll();
-	void	filTabFactory();//done
-	void 	filAvailableChipsetTab(); //done
+	void	filTabFactory();
+	void 	filAvailableChipsetTab();
 	bool	isAChipset(std::string);
 	void	makeLink();
+	void	setValue();
+	void 	setValue2(std::pair<std::string, std::string> arg);
 	void	makeLink2(std::pair <std::pair<std::string, size_t>, 
 	std::pair<std::string, size_t>> link, 
 	std::unique_ptr<nts::IComponent> &chipset);
 	nts::IComponent	&getComponentFromName(std::string name);
+	bool	getComponentFromNameBool(std::string name);
 	std::unique_ptr<nts::IComponent>	chipsetFactory(std::string type,
 		std::string name);
-	std::string	_command;
+	std::string _commande;
 	nts::Tristate	_clock;
 	std::string	_file;
 	std::map <std::string, void (Driver::*)()>	_tab_function;

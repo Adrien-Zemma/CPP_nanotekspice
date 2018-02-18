@@ -7,7 +7,10 @@
 
 #include "C_johnson.hpp"
 
-C_johnson::C_johnson(){}
+C_johnson::C_johnson()
+{
+	this->_type = CHIPSETS;
+}
 
 
 nts::Tristate C_johnson::calculate(size_t index)
