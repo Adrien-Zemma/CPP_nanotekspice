@@ -13,25 +13,35 @@ C_and::C_and()
 	this->_pinMax = 13;
 }
 
+void	C_and::_and(size_t index, size_t index2, size_t out)
+{
+	if (*this->_pin_status[index] == nts::TRUE && 
+		*this->_pin_status[index2] == nts::TRUE)
+				*this->_pin_status[out].get() = nts::TRUE;
+	else if (*this->_pin_status[index] == nts::FALSE && 
+		*this->_pin_status[index2] == nts::TRUE ||
+		*this->_pin_status[index] == nts::TRUE && 
+		*this->_pin_status[index2] == nts::FALSE)
+		*this->_pin_status[out].get() = nts::FALSE;
+	else 
+		*this->_pin_status[out].get() = nts::UNDEFINED;
+}
+
 nts::Tristate C_and::calculate(std::size_t index)
 {
 	switch (index)
 	{
 		case 3:
-			if (*this->_pin_status[1] == nts::TRUE && *this->_pin_status[2] == nts::TRUE)
-				*this->_pin_status[index] = nts::TRUE;
+			_and(1, 2, 3);
 		break;
 		case 6:
-			if (*this->_pin_status[1] == nts::TRUE && *this->_pin_status[2] == nts::TRUE)
-				*this->_pin_status[index] = nts::TRUE;
+			_and(4, 5, 6);
 		break;
 		case 10:
-			if (*this->_pin_status[1] == nts::TRUE && *this->_pin_status[2] == nts::TRUE)
-				*this->_pin_status[index] = nts::TRUE;
+			_and(9, 8, 10);
 		break;
 		case 13:
-			if (*this->_pin_status[1] == nts::TRUE && *this->_pin_status[2] == nts::TRUE)
-				*this->_pin_status[index] = nts::TRUE;
+			_and(11, 12, 13);
 		break;
 	}
 	return *this->_pin_status[index];

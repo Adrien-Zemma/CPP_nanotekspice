@@ -166,7 +166,7 @@ void Driver::display()
 void Driver::simulate()
 {
 	for (auto &el : this->_tab_chipset)
-		for(size_t i = 0; i <= el->getPinMax(); i++)
+		for(size_t i = el->getPinMax(); i >= 1; i--)
 			el->compute(i);
 	std::cout << "simulatation over" << std::endl;
 }
