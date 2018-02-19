@@ -7,7 +7,12 @@
 
 #include "C_flip_flop.hpp"
 
-nts::Tristate C_flip_flop::calculate(int index)
+C_flip_flop::C_flip_flop()
+{
+	this->_type = CHIPSETS;
+}
+
+nts::Tristate C_flip_flop::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

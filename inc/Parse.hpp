@@ -28,8 +28,13 @@ public:
 	int read(std::string file);
 	std::vector<std::string> split_line(const std::string &line) const;
 	std::vector<std::string> split_args(const std::string &line) const;
-	void dumpLinks() const;
-	void dumpChipsets() const;
+	std::vector<std::pair<std::pair
+		<std::string, size_t>, 
+		std::pair<std::string, size_t>>>	*getLink();
+	std::vector<std::pair<std::string, std::string>>	*getChipset();
+	void	dumpLinks() const;
+	void	dumpChipsets() const;
+	static std::string	clear(std::string str);
 	enum ParseTitle {
 		UNKONW,
 		CHIPSETS,

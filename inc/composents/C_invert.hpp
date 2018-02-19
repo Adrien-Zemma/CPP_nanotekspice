@@ -15,7 +15,8 @@ class C_invert: public Chipset
 public:
 	C_invert();
 private:
-	nts::Tristate calculate(int index);
+	nts::Tristate calculate(size_t index);
+	void _invert(size_t index, size_t out);
 };
 
 #endif /* !C_INVERT_HPP_ */

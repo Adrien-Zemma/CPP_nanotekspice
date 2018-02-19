@@ -7,7 +7,12 @@
 
 #include "C_conter.hpp"
 
-nts::Tristate C_conter::calculate(int index)
+C_conter::C_conter()
+{
+	this->_type = CHIPSETS;
+}
+
+nts::Tristate C_conter::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

@@ -5,7 +5,7 @@
 ** 
 */
 
-#include "parse.hpp"
+#include "Parse.hpp"
 
 Parse::Parse()
 	: _file("")

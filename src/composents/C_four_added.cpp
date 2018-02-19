@@ -7,24 +7,43 @@
 
 #include "C_four_added.hpp"
 
-C_four_added::C_four_added(){}
-
-nts::Tristate C_four_added::calculate(int index)
+C_four_added::C_four_added()
 {
-	/*
-	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output
-	*/
-	index = index;
-	return nts::UNDEFINED;
+	this->_type = CHIPSETS;
+}
+
+nts::Tristate C_four_added::calculate(size_t index)
+{
+	switch (index)
+	{
+		case 13:
+			_added(1, 15, 12, 13);
+		break;
+		case 12:
+			_added(2, 3, 11, 12);
+		break;
+		case 11:
+			_added(4, 5, 10, 11);
+		break;
+		case 10:
+			_added(6, 7, 9, 10);
+		break;
+	}
+	return *this->_pin_status[index];
 }
 
 void C_four_added::_added(int index1, int index2, int carry_in ,int output)
 {
-	std::vector <nts::Tristate> tab_a {nts::FALSE, nts::TRUE, nts::FALSE, nts::TRUE, nts::FALSE, nts::TRUE, nts::FALSE, nts::TRUE};
-	std::vector <nts::Tristate> tab_b {nts::FALSE, nts::FALSE, nts::TRUE, nts::TRUE, nts::FALSE, nts::FALSE, nts::TRUE, nts::TRUE};
-	std::vector <nts::Tristate> tab_c {nts::FALSE, nts::FALSE, nts::FALSE, nts::FALSE, nts::TRUE, nts::TRUE, nts::TRUE, nts::TRUE};
-	std::vector <nts::Tristate> tab_p {nts::FALSE, nts::FALSE, nts::FALSE, nts::TRUE, nts::FALSE, nts::TRUE, nts::TRUE, nts::TRUE};
-	std::vector <nts::Tristate> tab_o {nts::FALSE, nts::TRUE, nts::TRUE, nts::FALSE, nts::TRUE, nts::FALSE, nts::FALSE, nts::TRUE};
+	std::vector <nts::Tristate> tab_a {nts::FALSE, nts::TRUE, nts::FALSE,
+		nts::TRUE, nts::FALSE, nts::TRUE, nts::FALSE, nts::TRUE};
+	std::vector <nts::Tristate> tab_b {nts::FALSE, nts::FALSE, nts::TRUE,
+		nts::TRUE, nts::FALSE, nts::FALSE, nts::TRUE, nts::TRUE};
+	std::vector <nts::Tristate> tab_c {nts::FALSE, nts::FALSE, nts::FALSE,
+		nts::FALSE, nts::TRUE, nts::TRUE, nts::TRUE, nts::TRUE};
+	std::vector <nts::Tristate> tab_p {nts::FALSE, nts::FALSE, nts::FALSE,
+		 nts::TRUE, nts::FALSE, nts::TRUE, nts::TRUE, nts::TRUE};
+	std::vector <nts::Tristate> tab_o {nts::FALSE, nts::TRUE, nts::TRUE,
+		 nts::FALSE, nts::TRUE, nts::FALSE, nts::FALSE, nts::TRUE};
 
 	for (size_t el = 0; el <= tab_a.size() + 1; el++)
 	{
@@ -41,10 +60,13 @@ void C_four_added::_added(int index1, int index2, int carry_in ,int output)
 	*this->_pin_status[output] = nts::UNDEFINED;
 }
 
-//void C_four_added::calculate()
-//{
-//	_added(7, 6, 9, 10);
-//	_added(5, 4, 10, 11);
-//	_added(3, 2, 11, 12);
-//	_added(1, 15, 12, 13);
-//}
+
+/*
+	5 point noter de 0 a 4
+	- qualiter presa
+	(comment on a fait le projet repartition des tache)
+	- maintenabiliter (l'architecture / norme)
+	- organisation et methodologie (les commits repartition des taches / versionnigue)
+	- bonus
+	- test unitaire (pertinace)
+*/

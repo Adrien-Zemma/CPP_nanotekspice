@@ -7,7 +7,13 @@
 
 #include "C_johnson.hpp"
 
-nts::Tristate C_johnson::calculate(int index)
+C_johnson::C_johnson()
+{
+	this->_type = CHIPSETS;
+}
+
+
+nts::Tristate C_johnson::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

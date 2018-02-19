@@ -7,7 +7,12 @@
 
 #include "C_register.hpp"
 
-nts::Tristate C_register::calculate(int index)
+C_register::C_register()
+{
+	this->_type = CHIPSETS;
+}
+
+nts::Tristate C_register::calculate(size_t index)
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output

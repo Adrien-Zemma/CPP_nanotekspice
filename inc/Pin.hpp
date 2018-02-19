@@ -8,16 +8,18 @@
 #ifndef PIN_HPP_
 	#define PIN_HPP_
 
-#include "IComponent.hpp"
+#include "Chipset.hpp"
 
-class Pin
+class Pin : public Chipset
 {
 public:
-	Pin();
-	~Pin();
-	std::shared_ptr<nts::Tristate> getPin_ptr();
+	Pin(std::string);
+	std::shared_ptr<nts::Tristate> getPinPtr(size_t pin);
+	nts::Tristate	calculate(size_t pin);
+	//void	dump() const;
+	
 private:
-	std::shared_ptr<nts::Tristate> value;
+	std::vector<std::shared_ptr<nts::Tristate>>	_pin_status;
 };
 
 #endif /* !PIN_HPP_ */

@@ -15,7 +15,7 @@ class C_nand: public Chipset
 public:
 	C_nand();
 private:
-	nts::Tristate calculate(int index);
+	nts::Tristate calculate(size_t index);
 };
 
 #endif /* !C_NAND_HPP_ */

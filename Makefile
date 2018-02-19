@@ -1,4 +1,4 @@
-NAME	= program
+NAME	= nanotekspice
 
 CXX	= g++
 
@@ -21,13 +21,14 @@ SRCS	= ./src/Chipset.cpp \
 	  ./src/composents/C_rom.cpp \
 	  ./src/composents/C_xor.cpp \
 	  ./src/main.cpp \
-	  ./src/parsing/parse.cpp 
+	  ./src/parsing/Parse.cpp 
 
 OBJS	= $(SRCS:.cpp=.o)
 
 CXXFLAGS = -I./inc/
 CXXFLAGS += -I./inc/composents
-CXXFLAGS += -W -Wall -Wextra
+CXXFLAGS += -W -Wextra -Werror
+CXXFLAGS += -g3
 LDLIBS = 
 
 all: $(NAME)
@@ -46,7 +47,7 @@ fclean:
 re: fclean all
 
 %.o: %.cpp
-	@g++ -c -o $@ $(CXXFLAGS) $<
+	@$(CXX) -c -o $@ $(CXXFLAGS) $<
 	@echo -e "[\033[0;32m OK \033[0m] built '$@'"
 
 .PHONY: all clean fclean re

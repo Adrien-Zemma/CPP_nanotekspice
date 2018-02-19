@@ -17,8 +17,8 @@ class C_four_added: public Chipset
 {
 public:
 	C_four_added();
+	nts::Tristate calculate(size_t index);
 private:
-	nts::Tristate calculate(int index);
 	void _added(int index1, int index2, int carry_in ,int output);
 };
 

@@ -15,9 +15,11 @@
 #include "IComponent.hpp"
 #include "Chipset.hpp"
 #include "Pin.hpp"
+#include "Parse.hpp"
 #include "C_and.hpp"
 #include "C_conter.hpp"
 #include "C_flip_flop.hpp"
+#include "C_four_added.hpp"
 #include "C_invert.hpp"
 #include "C_johnson.hpp"
 #include "C_nand.hpp"
@@ -34,8 +36,11 @@ public:
 	Driver();
 	~Driver();
 	void	shell();
+	void	_init(char *file);	
+	Parse	parse;
+private:
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
-		 &value) const noexcept;
+		&value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat4008(const std::string
 		 &value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat4011(const std::string
@@ -60,26 +65,37 @@ public:
 		 &value) const noexcept;
 	std::unique_ptr<nts::IComponent>	creat2716(const std::string
 		 &value) const noexcept;
-
-private:
 	void 	loop();
 	void 	dump();
 	void	_exit();
 	void	display();
 	void	setclock();
-	void	new_line();
+	void	newLine();
 	void 	simulate();
-	void 	fil_available_chipsettab();
-	void 	create_component_shell(std::string component, std::string name);
-	void	file_chipsettab(std::vector<std::map<std::string, std::string>> *data);
-	std::string	_command;
+	void	dumpAll();
+	void	filTabFactory();
+	void 	filAvailableChipsetTab();
+	bool	isAChipset(std::string);
+	void	makeLink();
+	void	setValue();
+	void	reverseClock();
+	void 	setValue2(std::pair<std::string, std::string> arg);
+	void	makeLink2(std::pair <std::pair<std::string, size_t>, 
+	std::pair<std::string, size_t>> link, 
+	std::unique_ptr<nts::IComponent> &chipset);
+	nts::IComponent	&getComponentFromName(std::string name);
+	bool	getComponentFromNameBool(std::string name);
+	std::unique_ptr<nts::IComponent>	chipsetFactory(std::string type,
+		std::string name);
+	std::string _commande;
 	nts::Tristate	_clock;
 	std::string	_file;
-	std::map <std::string, void (Driver::*)()>		_tab_function;
-	std::map <std::string, nts::IComponent *>		_tab_chipset;
-	std::map <std::string, nts::IComponent *>		_available_chipset;
-	std::map <std::string, std::shared_ptr<nts::Tristate>>	_tab_input;
-	std::map <std::string, std::shared_ptr<nts::Tristate>>	_tab_output;
+	std::map <std::string, void (Driver::*)()>	_tab_function;
+	std::map <std::string, std::unique_ptr<nts::IComponent> (Driver::*)(const std::string &value) const noexcept>	_tab_factory;
+	std::map <std::string, nts::IComponent *>	_available_chipset;
+	std::vector <std::unique_ptr<nts::IComponent>>	_tab_chipset;
+	std::vector <std::unique_ptr<nts::IComponent>>	_tab_input;
+	std::vector <std::unique_ptr<nts::IComponent>>	_tab_output;
 };
 
 #endif /* !SHELL_HPP_ */
