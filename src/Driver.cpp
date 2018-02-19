@@ -163,12 +163,20 @@ void Driver::display()
 		el->dump();
 }
 
+void	Driver::reverseClock()
+{
+	if (_clock == nts::TRUE)
+		_clock = nts::FALSE;
+	else if (_clock == nts::FALSE)
+		_clock = nts::TRUE;
+}
+
 void Driver::simulate()
 {
 	for (auto &el : this->_tab_chipset)
 		for(size_t i = el->getPinMax(); i >= 1; i--)
 			el->compute(i);
-	std::cout << "simulatation over" << std::endl;
+	reverseClock();
 }
 
 void Driver::dump()

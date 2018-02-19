@@ -78,6 +78,7 @@ private:
 	bool	isAChipset(std::string);
 	void	makeLink();
 	void	setValue();
+	void	reverseClock();
 	void 	setValue2(std::pair<std::string, std::string> arg);
 	void	makeLink2(std::pair <std::pair<std::string, size_t>, 
 	std::pair<std::string, size_t>> link, 

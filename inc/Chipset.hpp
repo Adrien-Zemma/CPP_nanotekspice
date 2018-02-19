@@ -42,7 +42,7 @@ protected:
 	nts::Tristate					clock;
 	std::string					_name;
 	Type						_type;
-	size_t						_pinMax = 20;
+	size_t						_pinMax = 14;
 };
 
 #endif /* !CHIPSET_HPP_ */
