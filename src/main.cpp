@@ -9,5 +9,7 @@ int main(int ac, char **av)
 	Driver pilote;
 	Parse file(av[1]);
 
-	file.read();
+	if (file.read() == 84)
+		return (84);
+	return (0);
 }

@@ -8,6 +8,7 @@
 #ifndef PARSE_HPP_
 	#define PARSE_HPP_
 
+#include <algorithm>
 #include <string>
 #include <iostream>
 #include <map>
@@ -23,8 +24,8 @@ public:
 	Parse(const std::string &file);
 	~Parse();
 	
-	void read();
-	void read(std::string file);
+	int read();
+	int read(std::string file);
 	std::vector<std::string> split_line(const std::string &line) const;
 	std::vector<std::string> split_args(const std::string &line) const;
 	void dumpLinks() const;
@@ -38,6 +39,8 @@ public:
 private:
 	int count_args(const std::string line) const;
 	void append_line(std::string line);
+	int manage_error() const;
+	bool find_elem(const std::string value) const;
 
 	std::vector<std::pair<std::string, std::string>>		*_chipsets;
 	std::vector<std::pair<std::pair

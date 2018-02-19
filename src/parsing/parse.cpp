@@ -4,6 +4,7 @@
 ** File description:
 ** 
 */
+
 #include "parse.hpp"
 
 Parse::Parse()
@@ -28,22 +29,22 @@ Parse::~Parse()
 	delete _chipsets;
 }
 
-void Parse::read()
+int Parse::read()
 {
 	if (_file.empty()) {
 		std::cerr << "No files loaded" << std::endl;
-		return;
+		return (84);
 	}
-	this->read(_file);
+	return (this->read(_file));
 }
 
-void Parse::read(std::string file)
+int Parse::read(std::string file)
 {
 	std::ifstream in(file);
 
 	if (!in) {
 		std::cerr << "Can't open file" << std::endl;
-		return ;
+		return (84);
 	}
 	std::string line;
 	while (getline(in, line)) {
@@ -55,6 +56,7 @@ void Parse::read(std::string file)
 	}
 	dumpChipsets();
 	dumpLinks();
+	return (manage_error());
 }
 
 void Parse::append_line(std::string line)
@@ -145,9 +147,29 @@ std::vector<std::string> Parse::split_args(const std::string &line) const
 	return elems;
 }
 
+bool Parse::find_elem(const std::string value) const
+{
+	for (const auto &el : *_chipsets) {
+		if (el.first == value)
+			return true;
+	}
+	return false;
+}
+
+int Parse::manage_error() const
+{
+	for (const auto &it : *_links) {
+		if (!find_elem(it.first.first)) {
+			std::cerr << "Chipset " << it.first.first << " not declared" << std::endl;
+			return (84);
+		}
+	}
+	return (0);
+}
+
 void Parse::dumpChipsets() const
 {
-	std::cout << "Dump Chipsets" << std::endl << std::endl;
+	std::cout << "Dump Chipsets" << std::endl;
 	for (const auto &it : *_chipsets) {
         	std::cout << it.first << " => " << it.second << std::endl;
 	}
@@ -155,9 +177,9 @@ void Parse::dumpChipsets() const
 
 void Parse::dumpLinks() const
 {
-	std::cout << "Dump Links" << std::endl << std::endl;
+	std::cout << "Dump Links" << std::endl;
 	for (const auto &it : *_links) {
 		std::cout << "[" <<it.first.first << " => " << it.first.second << "] => ";
-		std::cout << "[" <<it.second.first << " => " << it.second.second << "]" << std::endl << std::endl;
+		std::cout << "[" <<it.second.first << " => " << it.second.second << "]" << std::endl;
 	}
 }
