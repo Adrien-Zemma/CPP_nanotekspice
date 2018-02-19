@@ -113,9 +113,7 @@ void Driver::setValue()
 		for (size_t i = 0; _commande[i] != '='; i++ )
 			arg.first += _commande[i];
 		for (size_t i = _commande.find("=") + 1; i < _commande.size(); i++)
-			arg.second += _commande[i];
-		arg.first = parse.clear(arg.first);
-		arg.second = parse.clear(arg.second);
+			arg.second += _commande[i];		
 		setValue2(arg);
 	}
 }

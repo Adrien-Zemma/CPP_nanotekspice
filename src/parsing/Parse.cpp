@@ -38,6 +38,18 @@ int Parse::read()
 	return (this->read(_file));
 }
 
+std::vector<std::pair<std::pair
+		<std::string, size_t>, 
+		std::pair<std::string, size_t>>>	*Parse::getLink()
+{
+	return _links;
+}
+
+std::vector<std::pair<std::string, std::string>>	*Parse::getChipset()
+{
+	return _chipsets;
+}
+
 int Parse::read(std::string file)
 {
 	std::ifstream in(file);
@@ -54,8 +66,6 @@ int Parse::read(std::string file)
 			_title = LINKS;
 		append_line(line);
 	}
-	dumpChipsets();
-	dumpLinks();
 	return (manage_error());
 }
 

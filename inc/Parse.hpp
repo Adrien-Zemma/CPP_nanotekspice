@@ -34,7 +34,6 @@ public:
 	std::vector<std::pair<std::string, std::string>>	*getChipset();
 	void	dumpLinks() const;
 	void	dumpChipsets() const;
-	static std::string	clear(std::string str);
 	enum ParseTitle {
 		UNKONW,
 		CHIPSETS,
