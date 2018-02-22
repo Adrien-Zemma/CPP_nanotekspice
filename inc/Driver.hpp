@@ -79,6 +79,7 @@ private:
 	void	makeLink();
 	void	setValue();
 	void	reverseClock();
+	nts::Tristate	stringToTristate(const std::string &value) const;
 	void 	setValue2(std::pair<std::string, std::string> arg);
 	void	makeLink2(std::pair <std::pair<std::string, size_t>, 
 	std::pair<std::string, size_t>> link, 
@@ -87,7 +88,7 @@ private:
 	bool	getComponentFromNameBool(std::string name);
 	std::unique_ptr<nts::IComponent>	chipsetFactory(std::string type,
 		std::string name);
-	std::string _commande;
+	std::string	_commande;
 	nts::Tristate	_clock;
 	std::string	_file;
 	std::map <std::string, void (Driver::*)()>	_tab_function;

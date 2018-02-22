@@ -14,7 +14,7 @@
 class C_flip_flop: public Chipset
 {
 public:
-	C_flip_flop();
+	C_flip_flop(nts::Tristate);
 private:
 	nts::Tristate calculate(size_t index);
 };

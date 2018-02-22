@@ -39,7 +39,7 @@ public:
 protected:
 	std::vector<std::shared_ptr<nts::Tristate>>	_pin_status;
 	std::vector<std::shared_ptr<nts::Tristate>>	_output;
-	nts::Tristate					clock;
+	nts::Tristate					_clock;
 	std::string					_name;
 	Type						_type;
 	size_t						_pinMax = 14;

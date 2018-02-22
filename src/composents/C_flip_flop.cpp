@@ -7,9 +7,10 @@
 
 #include "C_flip_flop.hpp"
 
-C_flip_flop::C_flip_flop()
+C_flip_flop::C_flip_flop(nts::Tristate cloc)
 {
 	this->_type = CHIPSETS;
+	this->_clock = cloc;
 }
 
 nts::Tristate C_flip_flop::calculate(size_t index)

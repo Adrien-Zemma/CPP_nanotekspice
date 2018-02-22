@@ -35,9 +35,9 @@ nts::Tristate C_or::calculate(size_t index)
 
 void C_or::_or(size_t index, size_t index2, size_t out)
 {
-	if (*_pin_status[index].get() == nts::TRUE || *_pin_status[index].get() == nts::TRUE)
+	if (*_pin_status[index].get() == nts::TRUE || *_pin_status[index2].get() == nts::TRUE)
 		*_pin_status[out].get() = nts::TRUE;
-	else if (*_pin_status[index].get() == nts::FALSE || *_pin_status[index].get() == nts::FALSE)
+	else if (*_pin_status[index].get() == nts::FALSE && *_pin_status[index2].get() == nts::FALSE)
 		*_pin_status[out].get() = nts::FALSE;
 	else 
 		*_pin_status[out].get() = nts::UNDEFINED;

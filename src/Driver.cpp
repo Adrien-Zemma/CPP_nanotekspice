@@ -50,7 +50,7 @@ void	Driver::filAvailableChipsetTab()
 	this->_available_chipset["4001"] = new C_nor();
 	this->_available_chipset["4008"] = new C_four_added();
 	this->_available_chipset["4011"] = new C_nand();
-	this->_available_chipset["4013"] = new C_flip_flop();
+	this->_available_chipset["4013"] = new C_flip_flop(_clock);
 	this->_available_chipset["4017"] = new C_johnson();
 	this->_available_chipset["4030"] = new C_xor();
 	this->_available_chipset["4040"] = new C_conter();
@@ -185,6 +185,15 @@ void Driver::dump()
 		el->dump();
 }
 
+nts::Tristate	Driver::stringToTristate(const std::string &value) const
+{
+	if (value == "TRUE" || value == "true")
+		return nts::TRUE;
+	if (value == "FALSE" || value == "false")
+		return nts::FALSE;
+	return nts::UNDEFINED;
+}
+
 std::unique_ptr<nts::IComponent>	Driver::creat4001(const std::string
 	&value) const noexcept
 {
@@ -204,10 +213,9 @@ std::unique_ptr<nts::IComponent>	Driver::creat4011(const std::string
 	 return std::unique_ptr<nts::IComponent>(new C_nand());
 }
 std::unique_ptr<nts::IComponent>	Driver::creat4013(const std::string
-	&value) const noexcept
+&value) const noexcept
 {
-	(void) value;
-	 return std::unique_ptr<nts::IComponent>(new C_flip_flop());
+	 return std::unique_ptr<nts::IComponent> (new C_flip_flop(stringToTristate(value)));
 }
 std::unique_ptr<nts::IComponent>	Driver::creat4017(const std::string
 	&value) const noexcept

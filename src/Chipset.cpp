@@ -107,3 +107,4 @@ std::ostream &operator<<(std::ostream &s, const nts::Tristate &o)
 	else if (o == nts::FALSE)
 		return s << 1;
 }
+
