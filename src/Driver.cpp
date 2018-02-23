@@ -279,7 +279,8 @@ void Driver::makeLink()
 		std::pair<std::string, size_t>>>	*tmp = this->parse.getLink();
 	for (auto &el: *tmp)
 		if (getComponentFromNameBool(el.first.first) && getComponentFromNameBool(el.second.first))
-			getComponentFromName(el.first.first).setLink(el.first.second, getComponentFromName(el.second.first), el.second.second);
+			getComponentFromName(el.first.first).setLink(el.first.second, 
+				getComponentFromName(el.second.first), el.second.second);
 }
 
 nts::IComponent &Driver::getComponentFromName(std::string name)

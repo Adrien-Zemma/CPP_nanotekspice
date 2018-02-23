@@ -17,6 +17,7 @@ public:
 	C_flip_flop(nts::Tristate);
 private:
 	nts::Tristate calculate(size_t index);
+	void	_flip_flop(std::vector<int>);
 };
 
 #endif /* !C_FLIP_FLOP_HPP_ */
