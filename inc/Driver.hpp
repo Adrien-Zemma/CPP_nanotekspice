@@ -70,7 +70,6 @@ private:
 	void	_exit();
 	void	display();
 	void	setclock();
-	void	newLine();
 	void 	simulate();
 	void	dumpAll();
 	void	filTabFactory();
@@ -80,7 +79,6 @@ private:
 	void	setValue();
 	void	reverseClock();
 	nts::Tristate	stringToTristate(const std::string &value) const;
-	void 	setValue2(std::pair<std::string, std::string> arg);
 	void	makeLink2(std::pair <std::pair<std::string, size_t>, 
 	std::pair<std::string, size_t>> link, 
 	std::unique_ptr<nts::IComponent> &chipset);

@@ -16,6 +16,7 @@
 #include <iterator>
 #include <sstream>
 #include <vector>
+#include <iterator>
 
 class Parse
 {
@@ -39,6 +40,8 @@ public:
 		CHIPSETS,
 		LINKS
 	};
+	static std::vector<std::string> split(const std::string &line, char c);
+	static void removeSpaces(std::string &input);
 
 private:
 	int count_args(const std::string line) const;

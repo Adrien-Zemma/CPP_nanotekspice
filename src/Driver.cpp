@@ -99,47 +99,28 @@ std::unique_ptr<nts::IComponent>	Driver::chipsetFactory(std::string type,
 	return nullptr;
 }
 
-void 	Driver::setValue2(std::pair<std::string, std::string> arg)
-{
-	getComponentFromName(arg.first).setPinValue(1, arg.second);
-}
-
 void Driver::setValue()
 {
-	std::pair<std::string, std::string> arg;
-
-	if (_commande.find("=") != std::string::npos)
-	{
-		for (size_t i = 0; _commande[i] != '='; i++ )
-			arg.first += _commande[i];
-		for (size_t i = _commande.find("=") + 1; i < _commande.size(); i++)
-			arg.second += _commande[i];		
-		setValue2(arg);
+	auto args = Parse::split(_commande, '=');
+	for (auto &it : args)
+		Parse::removeSpaces(it);
+	if (args.size() == 2) {
+		getComponentFromName(args[0]).setPinValue(1, args[1]);
 	}
 }
 
 void Driver::shell()
 {
-	while(42) {
-		this->newLine();
+	do {
+		std::cout << "> ";
+    		getline(std::cin,_commande);
 		setValue();
 		for(auto &el : _tab_function)
 			{
 				if (el.first == this->_commande)
 					(this->*el.second)();
 			}
-	}
-}
-
-void Driver::newLine()
-{
-	std::string arg1;
-	std::string arg2;
-	std::string arg3;
-
-	std::cout << "> ";
-	getline(std::cin, _commande);
-	std::cout << _commande << std::endl;
+	} while (!std::cin.eof());
 }
 
 void Driver::loop()

@@ -157,6 +157,25 @@ std::vector<std::string> Parse::split_args(const std::string &line) const
 	return elems;
 }
 
+std::vector<std::string> Parse::split(const std::string &line, char c)
+{
+	std::vector<std::string> elems;
+	std::string el;
+
+	for (size_t i = 0; i < line.length(); i++) {
+		if (line[i] == c) {
+			if (!el.empty())
+				elems.push_back(el);
+			el.clear();
+		}
+		else
+			el += line[i];
+	}
+	if (!el.empty())
+		elems.push_back(el);
+	return elems;
+}
+
 bool Parse::find_elem(const std::string value) const
 {
 	for (const auto &el : *_chipsets) {
@@ -164,6 +183,11 @@ bool Parse::find_elem(const std::string value) const
 			return true;
 	}
 	return false;
+}
+
+void Parse::removeSpaces(std::string &input)
+{
+	input.erase(std::remove(input.begin(),input.end(),' '),input.end());
 }
 
 int Parse::manage_error() const
