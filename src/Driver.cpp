@@ -7,6 +7,11 @@
 
 #include "Driver.hpp"
 
+namespace loop
+{
+	bool gSignalStatus;
+}
+
 Driver::Driver()
 {
 	this->_tab_function["loop"] = &Driver::loop;
@@ -87,10 +92,9 @@ void	Driver::readAv(char **av)
 
 void	Driver::_init(char *file, char **av)
 {
-	parse.read(file);
-
+	if (parse.read(file) == 84)
+		_exit_status = true;
 	std::vector<std::pair<std::string, std::string>> *chipset = parse.getChipset();
-
 	for (auto &el: *chipset) {
 		if (el.first == "input")
 			this->_tab_input.push_back(std::unique_ptr<nts::IComponent>(new Pin(el.second)));
@@ -143,10 +147,21 @@ void	Driver::shell()
 	} while (!std::cin.eof());
 }
 
+void	loopStatus(int sig)
+{
+	if (sig == 2)
+		loop::gSignalStatus = false;
+	else
+		loop::gSignalStatus = true;
+}
+
 void	Driver::loop()
 {
-	while(42)
+	loopStatus(0);
+	std::signal(SIGINT, loopStatus);
+	while(loop::gSignalStatus)
 		this->simulate();
+	loopStatus(0);
 }
 
 void	Driver::_exit()
@@ -192,6 +207,59 @@ nts::Tristate	Driver::stringToTristate(const std::string &value) const
 	if (value == "FALSE" || value == "false")
 		return nts::FALSE;
 	return nts::UNDEFINED;
+}
+
+void	Driver::checkLinks()
+{
+	for (auto &el : this->_tab_output)
+	{
+		if (el->getPinPtr(1).use_count() < 3)
+		{
+			std::cerr << "Output ‘"<< el->getName();
+			std::cerr << "’ is not linked to anything." << std::endl;
+			_exit_status = true;
+		}
+	}
+}
+
+void	Driver::makeLink()
+{
+	std::vector<std::pair 
+		<std::pair<std::string, size_t>, 
+		std::pair<std::string, size_t>>>	*tmp = this->parse.getLink();
+	for (auto &el: *tmp)
+		if (getComponentFromNameBool(el.first.first) && getComponentFromNameBool(el.second.first))
+			getComponentFromName(el.first.first).setLink(el.first.second, 
+				getComponentFromName(el.second.first), el.second.second);
+	checkLinks();
+}
+
+nts::IComponent	&Driver::getComponentFromName(std::string name)
+{
+	for(auto &el: this->_tab_input)
+		if (el->getName() == name)
+			return *el;
+	for(auto &el: this->_tab_output)
+		if (el->getName() == name)
+			return *el;
+	for(auto &el: this->_tab_chipset)
+		if (el->getName() == name)
+			return *el;
+	return *this->_tab_chipset[0];
+}
+
+bool	Driver::getComponentFromNameBool(std::string name)
+{
+	for(auto &el: this->_tab_input)
+		if (el->getName() == name)
+			return true;
+	for(auto &el: this->_tab_output)
+		if (el->getName() == name)
+			return true;
+	for(auto &el: this->_tab_chipset)
+		if (el->getName() == name)
+			return true;
+	return false;
 }
 
 std::unique_ptr<nts::IComponent>	Driver::creat4001(const std::string
@@ -270,56 +338,4 @@ std::unique_ptr<nts::IComponent>	Driver::creat2716(const std::string
 {
 	(void)value;
 	return std::unique_ptr<nts::IComponent>(new C_rom());
-}
-void	Driver::checkLinks()
-{
-	for (auto &el : this->_tab_output)
-	{
-		if (el->getPinPtr(1).use_count() < 3)
-		{
-			std::cerr << "Output ‘"<< el->getName();
-			std::cerr << "’ is not linked to anything." << std::endl;
-			_exit_status = true;
-		}
-	}
-}
-
-void	Driver::makeLink()
-{
-	std::vector<std::pair 
-		<std::pair<std::string, size_t>, 
-		std::pair<std::string, size_t>>>	*tmp = this->parse.getLink();
-	for (auto &el: *tmp)
-		if (getComponentFromNameBool(el.first.first) && getComponentFromNameBool(el.second.first))
-			getComponentFromName(el.first.first).setLink(el.first.second, 
-				getComponentFromName(el.second.first), el.second.second);
-	checkLinks();
-}
-
-nts::IComponent	&Driver::getComponentFromName(std::string name)
-{
-	for(auto &el: this->_tab_input)
-		if (el->getName() == name)
-			return *el;
-	for(auto &el: this->_tab_output)
-		if (el->getName() == name)
-			return *el;
-	for(auto &el: this->_tab_chipset)
-		if (el->getName() == name)
-			return *el;
-	return *this->_tab_chipset[0];
-}
-
-bool	Driver::getComponentFromNameBool(std::string name)
-{
-	for(auto &el: this->_tab_input)
-		if (el->getName() == name)
-			return true;
-	for(auto &el: this->_tab_output)
-		if (el->getName() == name)
-			return true;
-	for(auto &el: this->_tab_chipset)
-		if (el->getName() == name)
-			return true;
-	return false;
 }

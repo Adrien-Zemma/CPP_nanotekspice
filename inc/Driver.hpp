@@ -12,6 +12,7 @@
 #include <map>
 #include <vector>
 #include <memory>
+#include <csignal>
 #include "IComponent.hpp"
 #include "Chipset.hpp"
 #include "Pin.hpp"
@@ -36,7 +37,7 @@ public:
 	Driver();
 	~Driver();
 	void	shell();
-	void	_init(char *file, char **av);	
+	void	_init(char *file, char **av);
 	Parse	parse;
 private:
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
@@ -97,7 +98,7 @@ private:
 	std::vector <std::unique_ptr<nts::IComponent>>	_tab_chipset;
 	std::vector <std::unique_ptr<nts::IComponent>>	_tab_input;
 	std::vector <std::unique_ptr<nts::IComponent>>	_tab_output;
-	bool	_exit_status;
+	bool	_exit_status;	
 };
 
 #endif /* !SHELL_HPP_ */

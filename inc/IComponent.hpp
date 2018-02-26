@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <csignal>
 
 
 namespace	nts
@@ -25,6 +26,7 @@ namespace	nts
 		PIN,
 		CHIPSETS
 	};
+
 	class	IComponent
 	{
 	public:
