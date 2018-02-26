@@ -10,7 +10,7 @@
 
 C_or::C_or()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 
 nts::Tristate C_or::calculate(size_t index)

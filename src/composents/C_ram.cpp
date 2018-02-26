@@ -9,7 +9,7 @@
 
 C_ram::C_ram()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 
 

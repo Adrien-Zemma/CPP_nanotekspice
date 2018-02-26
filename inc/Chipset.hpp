@@ -14,11 +14,6 @@
 class Chipset :public nts::IComponent
 {
 public:
-	enum Type
-	{
-		PIN,
-		CHIPSETS
-	};
 	Chipset();
 	Chipset(std::string type);
 	virtual ~Chipset();
@@ -36,12 +31,13 @@ public:
 	void	setName(std::string);
 	void	dump() const;
 	void	dumpPin() const;
+	nts::Type	getType();
 protected:
 	std::vector<std::shared_ptr<nts::Tristate>>	_pin_status;
 	std::vector<std::shared_ptr<nts::Tristate>>	_output;
 	nts::Tristate					_clock;
 	std::string					_name;
-	Type						_type;
+	nts::Type						_type;
 	size_t						_pinMax = 14;
 };
 

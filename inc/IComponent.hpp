@@ -20,6 +20,11 @@ namespace	nts
 		TRUE = true,
 		FALSE = false
 	};
+	enum Type
+	{
+		PIN,
+		CHIPSETS
+	};
 	class	IComponent
 	{
 	public:
@@ -36,6 +41,7 @@ namespace	nts
 		virtual	size_t	getPinMax() = 0;
 		virtual	nts::Tristate	getPinValue(int index) = 0;
 		virtual void	setPinPtr(int index, std::shared_ptr<nts::Tristate> status) = 0;
+		virtual	nts::Type	getType() = 0;
 	};
 }
 std::ostream &operator<<(std::ostream &s, const nts::Tristate &o);

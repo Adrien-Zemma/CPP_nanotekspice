@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** cpp_nanotekspice
 ** File description:
-** 
+**
 */
 
 #include "Driver.hpp"
@@ -16,16 +16,16 @@ Driver::Driver()
 	this->_tab_function["dump"] = &Driver::dump;
 	filAvailableChipsetTab();
 	filTabFactory();
+	_clock = nts::TRUE;
+	_exit_status = false;
 }
 
 Driver::~Driver()
 {
-	for(auto &el : _tab_chipset)
-		delete el.get();
-	for (auto &el : _tab_output)
-		delete el.get();
-	for(auto &el : _tab_input)
-		delete el.get();	
+	for (auto el : _available_chipset)
+	{
+		delete el.second;
+	}
 }
 
 void	Driver::filTabFactory()
@@ -70,7 +70,22 @@ bool	Driver::isAChipset(std::string name)
 	return false;
 }
 
-void	Driver::_init(char *file)
+void	Driver::readAv(char **av)
+{
+	std::vector<std::string> tmp;
+	for (size_t i = 0; av[i] != NULL; i++)
+		tmp.push_back(av[i]);
+	if (tmp.size() < 2)
+		return ;
+	for (size_t i = 2; i < tmp.size(); i++)
+	{
+		_commande = tmp[i];
+		setValue();
+	}
+	_commande = "";
+}
+
+void	Driver::_init(char *file, char **av)
 {
 	parse.read(file);
 
@@ -85,6 +100,7 @@ void	Driver::_init(char *file)
 			this->_tab_chipset.push_back(chipsetFactory(el.first, el.second));
 	}
 	this->makeLink();
+	this->readAv(av);
 }
 
 std::unique_ptr<nts::IComponent>	Driver::chipsetFactory(std::string type,
@@ -99,44 +115,44 @@ std::unique_ptr<nts::IComponent>	Driver::chipsetFactory(std::string type,
 	return nullptr;
 }
 
-void Driver::setValue()
+void	Driver::setValue()
 {
 	auto args = Parse::split(_commande, '=');
 	for (auto &it : args)
 		Parse::removeSpaces(it);
 	if (args.size() == 2) {
-		getComponentFromName(args[0]).setPinValue(1, args[1]);
+		if (getComponentFromName(args[0]).getType() == nts::PIN)
+			getComponentFromName(args[0]).setPinValue(1, args[1]);
 	}
 }
 
-void Driver::shell()
+void	Driver::shell()
 {
 	do {
 		std::cout << "> ";
-    		getline(std::cin,_commande);
+    		getline(std::cin, _commande);
 		setValue();
 		for(auto &el : _tab_function)
-			{
-				if (el.first == this->_commande)
-					(this->*el.second)();
-			}
+			if (el.first == this->_commande)
+				(this->*el.second)();
+		if (_exit_status == true)
+			return ;
 	} while (!std::cin.eof());
 }
 
-void Driver::loop()
+void	Driver::loop()
 {
 	while(42)
 		this->simulate();
 }
 
-void Driver::_exit()
+void	Driver::_exit()
 {
-	std::cout << "exit" << std::endl;
 	this->display();
-	exit(0);
+	_exit_status = true;
 }
 
-void Driver::display()
+void	Driver::display()
 {
 	for (auto &el: this->_tab_output)
 		el->dump();
@@ -150,15 +166,16 @@ void	Driver::reverseClock()
 		_clock = nts::TRUE;
 }
 
-void Driver::simulate()
+void	Driver::simulate()
 {
+	std::cout << "coucou" <<std::endl;
 	for (auto &el : this->_tab_chipset)
 		for(size_t i = el->getPinMax(); i >= 1; i--)
 			el->compute(i);
 	reverseClock();
 }
 
-void Driver::dump()
+void	Driver::dump()
 {
 	for (auto &el: this->_tab_input)
 		el->dump();
@@ -253,7 +270,7 @@ std::unique_ptr<nts::IComponent>	Driver::creat2716(const std::string
 	return std::unique_ptr<nts::IComponent>(new C_rom());
 }
 
-void Driver::makeLink()
+void	Driver::makeLink()
 {
 	std::vector<std::pair 
 		<std::pair<std::string, size_t>, 
@@ -264,7 +281,7 @@ void Driver::makeLink()
 				getComponentFromName(el.second.first), el.second.second);
 }
 
-nts::IComponent &Driver::getComponentFromName(std::string name)
+nts::IComponent	&Driver::getComponentFromName(std::string name)
 {
 	for(auto &el: this->_tab_input)
 		if (el->getName() == name)

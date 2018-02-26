@@ -9,7 +9,7 @@
 
 C_johnson::C_johnson()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 
 

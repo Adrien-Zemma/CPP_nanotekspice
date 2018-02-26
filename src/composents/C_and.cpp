@@ -9,7 +9,7 @@
 
 C_and::C_and()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 	this->_pinMax = 13;
 }
 

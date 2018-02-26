@@ -9,7 +9,7 @@
 
 C_nand::C_nand()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 
 nts::Tristate C_nand::calculate(size_t index)

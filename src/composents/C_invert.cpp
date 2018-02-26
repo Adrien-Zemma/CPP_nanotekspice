@@ -9,7 +9,7 @@
 
 C_invert::C_invert()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 void	C_invert::_invert(size_t index, size_t out)
 {

@@ -9,7 +9,7 @@
 
 C_rom::C_rom()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 
 nts::Tristate C_rom::calculate(size_t index)

@@ -9,14 +9,17 @@
 
 Chipset::Chipset()
 {
-	for(int i = 0; i <= 20 ; i++)
+	for(size_t i = 0; i <= this->_pinMax ; i++)
 		this->_pin_status.push_back(std::make_shared<nts::Tristate>(nts::Tristate(nts::UNDEFINED)));
 }
 
 Chipset::~Chipset()
 {
-	for (auto el : _pin_status)
-		delete el.get();
+}
+
+nts::Type	Chipset::getType()
+{
+	return this->_type;
 }
 
 nts::Tristate	Chipset::compute(std::size_t pin)
@@ -24,7 +27,7 @@ nts::Tristate	Chipset::compute(std::size_t pin)
 	return this->calculate(pin);
 }
 
-void Chipset::setName(std::string name)
+void	Chipset::setName(std::string name)
 {
 	this->_name = name;
 }
@@ -47,7 +50,6 @@ nts::Tristate	Chipset::getPinValue(int index)
 void	Chipset::setPinValue(int index, nts::Tristate value)
 {
 	*this->_pin_status[index].get() = value;
-	std::cout << this->_name << " :" << index << "\t"<< value << "->" << *this->_pin_status[index].get() << std::endl;
 }
 
 void	Chipset::setPinValue(int index, std::string value)
@@ -67,25 +69,25 @@ size_t	Chipset::getPinMax()
 
 void	Chipset::dumpPin() const
 {
-	std::cout << "Composent :\t" << this->_name << std::endl;
-	std::cout << "pin " << 1 << " value = \t";
-	std::cout <<  *this->_pin_status[1].get() << std::endl;
+	std::cout << this->_name << "=" << *this->_pin_status[1].get();
 	std::cout << std::endl;
 }
 
 void	Chipset::dump() const
 {
-	int i = 0;
-	if (_type == PIN)
+	if (_type == nts::PIN)
 	{
 		this->dumpPin();
 		return ;
 	}
-	std::cout << "Composent :\t" << this->_name << std::endl;
-	for (size_t i = 1; i <= this->_pinMax; i++)
-		if (i != 0)
-			std::cout << "pin " << i << " value = \t" << *this->_pin_status[i].get() << std::endl;
-	std::cout << std::endl;
+	else
+	{
+		for (size_t i = 1; i <= this->_pinMax; i++)
+		{
+			std::cout << _name << ":" << i << "=";
+			std::cout << *this->_pin_status[i].get() << std::endl;
+		}
+	}
 }
 
 void	Chipset::setLink (std::size_t pin, nts::IComponent &other, std::size_t otherPin)

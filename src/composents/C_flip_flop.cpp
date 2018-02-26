@@ -9,7 +9,7 @@
 
 C_flip_flop::C_flip_flop(nts::Tristate cloc)
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 	this->_clock = cloc;
 }
 

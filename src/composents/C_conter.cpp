@@ -9,7 +9,7 @@
 
 C_conter::C_conter()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 
 nts::Tristate C_conter::calculate(size_t index)

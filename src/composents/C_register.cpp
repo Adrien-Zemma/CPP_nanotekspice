@@ -9,7 +9,7 @@
 
 C_register::C_register()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 
 nts::Tristate C_register::calculate(size_t index)

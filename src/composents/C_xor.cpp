@@ -9,7 +9,7 @@
 
 C_xor::C_xor()
 {
-	this->_type = CHIPSETS;
+	this->_type = nts::CHIPSETS;
 }
 
 void	C_xor::_xor(size_t index, size_t index2, size_t out)

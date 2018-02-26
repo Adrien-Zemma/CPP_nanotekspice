@@ -36,7 +36,7 @@ public:
 	Driver();
 	~Driver();
 	void	shell();
-	void	_init(char *file);	
+	void	_init(char *file, char **av);	
 	Parse	parse;
 private:
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
@@ -78,6 +78,7 @@ private:
 	void	makeLink();
 	void	setValue();
 	void	reverseClock();
+	void	readAv(char **av);
 	nts::Tristate	stringToTristate(const std::string &value) const;
 	void	makeLink2(std::pair <std::pair<std::string, size_t>, 
 	std::pair<std::string, size_t>> link, 
@@ -95,6 +96,7 @@ private:
 	std::vector <std::unique_ptr<nts::IComponent>>	_tab_chipset;
 	std::vector <std::unique_ptr<nts::IComponent>>	_tab_input;
 	std::vector <std::unique_ptr<nts::IComponent>>	_tab_output;
+	bool	_exit_status;
 };
 
 #endif /* !SHELL_HPP_ */
