@@ -85,6 +85,7 @@ private:
 	std::unique_ptr<nts::IComponent> &chipset);
 	nts::IComponent	&getComponentFromName(std::string name);
 	bool	getComponentFromNameBool(std::string name);
+	void	checkLinks();
 	std::unique_ptr<nts::IComponent>	chipsetFactory(std::string type,
 		std::string name);
 	std::string	_commande;

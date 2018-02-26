@@ -128,6 +128,8 @@ void	Driver::setValue()
 
 void	Driver::shell()
 {
+	if (_exit_status == true)
+		return ;
 	do {
 		std::cout << "> ";
     		getline(std::cin, _commande);
@@ -269,6 +271,18 @@ std::unique_ptr<nts::IComponent>	Driver::creat2716(const std::string
 	(void)value;
 	return std::unique_ptr<nts::IComponent>(new C_rom());
 }
+void	Driver::checkLinks()
+{
+	for (auto &el : this->_tab_output)
+	{
+		if (el->getPinPtr(1).use_count() < 3)
+		{
+			std::cerr << "Output ‘"<< el->getName();
+			std::cerr << "’ is not linked to anything." << std::endl;
+			_exit_status = true;
+		}
+	}
+}
 
 void	Driver::makeLink()
 {
@@ -279,6 +293,7 @@ void	Driver::makeLink()
 		if (getComponentFromNameBool(el.first.first) && getComponentFromNameBool(el.second.first))
 			getComponentFromName(el.first.first).setLink(el.first.second, 
 				getComponentFromName(el.second.first), el.second.second);
+	checkLinks();
 }
 
 nts::IComponent	&Driver::getComponentFromName(std::string name)
