@@ -101,6 +101,7 @@ void	Driver::_init(char *file, char **av)
 	}
 	this->makeLink();
 	this->readAv(av);
+	this->simulate();
 }
 
 std::unique_ptr<nts::IComponent>	Driver::chipsetFactory(std::string type,
@@ -170,7 +171,6 @@ void	Driver::reverseClock()
 
 void	Driver::simulate()
 {
-	std::cout << "coucou" <<std::endl;
 	for (auto &el : this->_tab_chipset)
 		for(size_t i = el->getPinMax(); i >= 1; i--)
 			el->compute(i);
