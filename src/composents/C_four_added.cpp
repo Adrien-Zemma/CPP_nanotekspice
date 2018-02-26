@@ -14,8 +14,7 @@ C_four_added::C_four_added()
 
 nts::Tristate C_four_added::calculate(size_t index)
 {
-	switch (index)
-	{
+	switch (index) {
 		case 13:
 			_added(1, 15, 12, 13);
 		break;

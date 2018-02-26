@@ -10,7 +10,8 @@
 Parse::Parse()
 	: _file("")
 {
-	_links = new std::vector<std::pair<std::pair<std::string, size_t>, std::pair<std::string, size_t>>>;
+	_links = new std::vector<std::pair<std::pair<std::string, size_t>,
+		std::pair<std::string, size_t>>>;
 	_chipsets = new std::vector<std::pair<std::string, std::string>>;
 	_title = UNKONW;
 }
@@ -18,7 +19,8 @@ Parse::Parse()
 Parse::Parse(const std::string &file)
 	: _file(file)
 {
-	_links = new std::vector<std::pair<std::pair<std::string, size_t>, std::pair<std::string, size_t>>>;
+	_links = new std::vector<std::pair<std::pair<std::string, size_t>,
+		std::pair<std::string, size_t>>>;
 	_chipsets = new std::vector<std::pair<std::string, std::string>>;
 	_title = UNKONW;
 }
@@ -29,7 +31,7 @@ Parse::~Parse()
 	delete _chipsets;
 }
 
-int Parse::read()
+int	Parse::read()
 {
 	if (_file.empty()) {
 		std::cerr << "No files loaded" << std::endl;
@@ -50,7 +52,7 @@ std::vector<std::pair<std::string, std::string>>	*Parse::getChipset()
 	return _chipsets;
 }
 
-int Parse::read(std::string file)
+int	Parse::read(std::string file)
 {
 	std::ifstream in(file);
 
@@ -69,14 +71,15 @@ int Parse::read(std::string file)
 	return (manage_error());
 }
 
-void Parse::append_line(std::string line)
+void	Parse::append_line(std::string line)
 {
 	auto elems = split_line(line);
 
 	switch(_title) {
 		case CHIPSETS:
 		if (elems.size() == 2)
-			_chipsets->push_back(std::pair<std::string,std::string>(elems[0], elems[1]));
+			_chipsets->push_back(std::pair<std::string,std::string>
+				(elems[0], elems[1]));
 		break;
 		case LINKS:
 		if (elems.size() == 2) {
@@ -84,11 +87,14 @@ void Parse::append_line(std::string line)
 			std::pair<std::string, size_t> second;
 			auto sub_elems = split_args(elems[0]);
 			if (sub_elems.size() == 2)
-				first = std::make_pair(sub_elems[0], std::stoi(sub_elems[1]));
+				first = std::make_pair(sub_elems[0],
+					std::stoi(sub_elems[1]));
 			sub_elems = split_args(elems[1]);			
 			if (sub_elems.size() == 2)
-				second = std::make_pair(sub_elems[0], std::stoi(sub_elems[1]));
-			_links->push_back(std::pair<std::pair<std::string, size_t>, std::pair<std::string, size_t>>(first, second));
+				second = std::make_pair(sub_elems[0],
+					std::stoi(sub_elems[1]));
+			_links->push_back(std::pair<std::pair<std::string, size_t>,
+				std::pair<std::string, size_t>>(first, second));
 		}
 		break;
 		default:
@@ -96,7 +102,7 @@ void Parse::append_line(std::string line)
 	}
 }
 
-int Parse::count_args(const std::string line) const
+int	Parse::count_args(const std::string line) const
 {
 	size_t	nb = 0;
 
@@ -176,7 +182,7 @@ std::vector<std::string> Parse::split(const std::string &line, char c)
 	return elems;
 }
 
-bool Parse::find_elem(const std::string value) const
+bool	Parse::find_elem(const std::string value) const
 {
 	for (const auto &it : *_chipsets) {
 		if (it.second == value)
@@ -185,23 +191,25 @@ bool Parse::find_elem(const std::string value) const
 	return false;
 }
 
-void Parse::removeSpaces(std::string &input)
+void	Parse::removeSpaces(std::string &input)
 {
 	input.erase(std::remove(input.begin(),input.end(),' '),input.end());
 }
 
-int Parse::manage_error() const
+int	Parse::manage_error() const
 {
 	for (const auto &it : *_links) {
-		if (!find_elem(it.first.first) || !find_elem(it.second.first)) {
-			std::cerr << "Chipset " << it.first.first << " not declared" << std::endl;
+		if (!find_elem(it.first.first) || 
+			!find_elem(it.second.first)) {
+			std::cerr << "Chipset " << it.first.first;
+			std::cout << " not declared" << std::endl;
 			return (84);
 		}
 	}
 	return (0);
 }
 
-void Parse::dumpChipsets() const
+void	Parse::dumpChipsets() const
 {
 	std::cout << "Dump Chipsets" << std::endl;
 	for (const auto &it : *_chipsets) {
@@ -209,11 +217,13 @@ void Parse::dumpChipsets() const
 	}
 }
 
-void Parse::dumpLinks() const
+void	Parse::dumpLinks() const
 {
 	std::cout << "Dump Links" << std::endl;
 	for (const auto &it : *_links) {
-		std::cout << "[" <<it.first.first << " => " << it.first.second << "] => ";
-		std::cout << "[" <<it.second.first << " => " << it.second.second << "]" << std::endl;
+		std::cout << "[" <<it.first.first << " => ";
+		std::cout << it.first.second << "] => ";
+		std::cout << "[" <<it.second.first << " => ";
+		std::cout << it.second.second << "]" << std::endl;
 	}
 }

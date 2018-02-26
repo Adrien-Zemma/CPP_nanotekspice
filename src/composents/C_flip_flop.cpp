@@ -15,11 +15,16 @@ C_flip_flop::C_flip_flop(nts::Tristate cloc)
 
 void	C_flip_flop::_flip_flop(std::vector<int> set)
 {
-	std::vector<nts::Tristate> table1 = {nts::TRUE, nts::FALSE, nts::FALSE, nts::FALSE, nts::FALSE, nts::TRUE};
-	std::vector<nts::Tristate> table2 = {nts::TRUE, nts::FALSE, nts::FALSE, nts::TRUE, nts::TRUE, nts::FALSE};
-	std::vector<nts::Tristate> table3 = {nts::FALSE, nts::FALSE, nts::TRUE, nts::FALSE, nts::FALSE, nts::TRUE};
-	std::vector<nts::Tristate> table4 = {nts::FALSE, nts::TRUE, nts::FALSE, nts::FALSE, nts::TRUE, nts::FALSE};
-	std::vector<nts::Tristate> table5 = {nts::FALSE, nts::TRUE, nts::TRUE, nts::FALSE, nts::TRUE, nts::TRUE};
+	std::vector<nts::Tristate> table1 = {nts::TRUE, nts::FALSE, nts::FALSE,
+		nts::FALSE, nts::FALSE, nts::TRUE};
+	std::vector<nts::Tristate> table2 = {nts::TRUE, nts::FALSE, nts::FALSE,
+		nts::TRUE, nts::TRUE, nts::FALSE};
+	std::vector<nts::Tristate> table3 = {nts::FALSE, nts::FALSE, nts::TRUE,
+		nts::FALSE, nts::FALSE, nts::TRUE};
+	std::vector<nts::Tristate> table4 = {nts::FALSE, nts::TRUE, nts::FALSE,
+		nts::FALSE, nts::TRUE, nts::FALSE};
+	std::vector<nts::Tristate> table5 = {nts::FALSE, nts::TRUE, nts::TRUE,
+		nts::FALSE, nts::TRUE, nts::TRUE};
 }
 
 nts::Tristate C_flip_flop::calculate(size_t index)

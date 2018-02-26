@@ -9,7 +9,7 @@
 
 namespace loop
 {
-	bool gSignalStatus;
+	bool	gSignalStatus;
 	void	loopStatus(int sig);
 }
 
@@ -30,9 +30,7 @@ Driver::Driver()
 Driver::~Driver()
 {
 	for (auto el : _available_chipset)
-	{
 		delete el.second;
-	}
 }
 
 void	Driver::filTabFactory()
@@ -96,18 +94,23 @@ void	Driver::_init(char *file, char **av)
 {
 	if (parse.read(file) == 84)
 		_exit_status = true;
-	std::vector<std::pair<std::string, std::string>> *chipset = parse.getChipset();
+	std::vector<std::pair<std::string, std::string>> *chipset;
+	chipset = parse.getChipset();
 	for (auto &el: *chipset) {
 		if (el.first == "input")
-			this->_tab_input.push_back(std::unique_ptr<nts::IComponent>(new Pin(el.second)));
+			this->_tab_input.push_back(std::unique_ptr
+				<nts::IComponent>(new Pin(el.second)));
 		else if (el.first == "output")
-			this->_tab_output.push_back(std::unique_ptr<nts::IComponent>(new Pin(el.second)));
+			this->_tab_output.push_back(std::unique_ptr
+				<nts::IComponent>(new Pin(el.second)));
 		else if (isAChipset(el.first))
-			this->_tab_chipset.push_back(chipsetFactory(el.first, el.second));
+			this->_tab_chipset.push_back(chipsetFactory(el.first,
+				 el.second));
 	}
 	this->makeLink();
 	this->readAv(av);
 	this->simulate();
+	this->display();
 }
 
 std::unique_ptr<nts::IComponent>	Driver::chipsetFactory(std::string type,
@@ -115,7 +118,8 @@ std::unique_ptr<nts::IComponent>	Driver::chipsetFactory(std::string type,
 {
 	for (auto &el : this->_tab_factory)
 		if (el.first == type) {
-			std::unique_ptr<nts::IComponent> tmp = (this->*el.second)("");
+			std::unique_ptr<nts::IComponent> tmp;
+			tmp = (this->*el.second)("");
 			tmp.get()->setName(name);
 			return tmp;
 		}
@@ -212,10 +216,8 @@ nts::Tristate	Driver::stringToTristate(const std::string &value) const
 
 void	Driver::checkLinks()
 {
-	for (auto &el : this->_tab_output)
-	{
-		if (el->getPinPtr(1).use_count() < 3)
-		{
+	for (auto &el : this->_tab_output) {
+		if (el->getPinPtr(1).use_count() < 3) {
 			std::cerr << "Output ‘"<< el->getName();
 			std::cerr << "’ is not linked to anything." << std::endl;
 			_exit_status = true;
@@ -229,9 +231,10 @@ void	Driver::makeLink()
 		<std::pair<std::string, size_t>, 
 		std::pair<std::string, size_t>>>	*tmp = this->parse.getLink();
 	for (auto &el: *tmp)
-		if (getComponentFromNameBool(el.first.first) && getComponentFromNameBool(el.second.first))
-			getComponentFromName(el.first.first).setLink(el.first.second, 
-				getComponentFromName(el.second.first), el.second.second);
+		if (getComponentFromNameBool(el.first.first) 
+		&& getComponentFromNameBool(el.second.first))
+		getComponentFromName(el.first.first).setLink(el.first.second,
+		getComponentFromName(el.second.first), el.second.second);
 	checkLinks();
 }
 

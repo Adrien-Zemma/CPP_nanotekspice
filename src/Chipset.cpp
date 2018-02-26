@@ -75,22 +75,20 @@ void	Chipset::dumpPin() const
 
 void	Chipset::dump() const
 {
-	if (_type == nts::PIN)
-	{
+	if (_type == nts::PIN) {
 		this->dumpPin();
 		return ;
 	}
-	else
-	{
-		for (size_t i = 1; i <= this->_pinMax; i++)
-		{
+	else {
+		for (size_t i = 1; i <= this->_pinMax; i++){
 			std::cout << _name << ":" << i << "=";
 			std::cout << *this->_pin_status[i].get() << std::endl;
 		}
 	}
 }
 
-void	Chipset::setLink (std::size_t pin, nts::IComponent &other, std::size_t otherPin)
+void	Chipset::setLink (std::size_t pin, nts::IComponent &other,
+	std::size_t otherPin)
 {
 	this->setPinPtr(pin, other.getPinPtr(otherPin));
 }
