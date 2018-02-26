@@ -15,13 +15,16 @@ C_and::C_and()
 
 void	C_and::_and(size_t index, size_t index2, size_t out)
 {
-	if (*this->_pin_status[index] == nts::TRUE && 
-		*this->_pin_status[index2] == nts::TRUE)
-				*this->_pin_status[out].get() = nts::TRUE;
-	else if (*this->_pin_status[index] == nts::FALSE && 
-		*this->_pin_status[index2] == nts::TRUE ||
-		*this->_pin_status[index] == nts::TRUE && 
-		*this->_pin_status[index2] == nts::FALSE)
+	
+	if (*this->_pin_status[index].get() == nts::TRUE && 
+		*this->_pin_status[index2].get() == nts::TRUE)
+		*this->_pin_status[out] = nts::TRUE;
+	else if (*this->_pin_status[index].get() == nts::FALSE && 
+		*this->_pin_status[index2].get() == nts::TRUE ||
+		*this->_pin_status[index].get() == nts::TRUE && 
+		*this->_pin_status[index2].get() == nts::FALSE ||
+		*this->_pin_status[index].get() == nts::FALSE && 
+		*this->_pin_status[index2].get() == nts::FALSE)
 		*this->_pin_status[out].get() = nts::FALSE;
 	else 
 		*this->_pin_status[out].get() = nts::UNDEFINED;
