@@ -10,6 +10,7 @@
 namespace loop
 {
 	bool gSignalStatus;
+	void	loopStatus(int sig);
 }
 
 Driver::Driver()
@@ -21,6 +22,7 @@ Driver::Driver()
 	this->_tab_function["dump"] = &Driver::dump;
 	filAvailableChipsetTab();
 	filTabFactory();
+	std::signal(SIGINT, loop::loopStatus);
 	_clock = nts::TRUE;
 	_exit_status = false;
 }
@@ -147,7 +149,7 @@ void	Driver::shell()
 	} while (!std::cin.eof());
 }
 
-void	loopStatus(int sig)
+void	loop::loopStatus(int sig)
 {
 	if (sig == 2)
 		loop::gSignalStatus = false;
@@ -157,11 +159,10 @@ void	loopStatus(int sig)
 
 void	Driver::loop()
 {
-	loopStatus(0);
-	std::signal(SIGINT, loopStatus);
+	loop::loopStatus(0);
 	while(loop::gSignalStatus)
 		this->simulate();
-	loopStatus(0);
+	loop::loopStatus(0);
 }
 
 void	Driver::_exit()
