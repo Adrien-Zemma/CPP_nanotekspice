@@ -176,15 +176,6 @@ std::vector<std::string> Parse::split(const std::string &line, char c)
 	return elems;
 }
 
-bool Parse::find_elem(const std::string value) const
-{
-	for (const auto &el : *_chipsets) {
-		if (el.first == value)
-			return true;
-	}
-	return false;
-}
-
 void Parse::removeSpaces(std::string &input)
 {
 	input.erase(std::remove(input.begin(),input.end(),' '),input.end());
@@ -192,12 +183,12 @@ void Parse::removeSpaces(std::string &input)
 
 int Parse::manage_error() const
 {
-	for (const auto &it : *_links) {
-		if (!find_elem(it.first.first)) {
-			std::cerr << "Chipset " << it.first.first << " not declared" << std::endl;
-			return (84);
-		}
-	}
+	// for (const auto &it : *_links) {
+	// 	if (!find_elem(it.first.first)) {
+	// 		std::cerr << "Chipset " << it.first.first << " not declared" << std::endl;
+	// 		return (84);
+	// 	}
+	// }
 	return (0);
 }
 
