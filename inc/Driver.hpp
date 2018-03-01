@@ -34,7 +34,7 @@
 class Driver
 {
 public:
-	Driver();
+	Driver(char **arg);
 	~Driver();
 	void	shell();
 	void	_init(char *file, char **av);

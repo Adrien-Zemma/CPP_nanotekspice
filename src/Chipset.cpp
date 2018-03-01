@@ -2,14 +2,14 @@
 ** EPITECH PROJECT, 2018
 ** cpp_nanotekspice
 ** File description:
-** 
+**
 */
 
 #include "Chipset.hpp"
 
 Chipset::Chipset()
 {
-	for(size_t i = 0; i <= this->_pinMax ; i++)
+	for (size_t i = 0; i <= this->_pinMax ; i++)
 		this->_pin_status.push_back(std::make_shared<nts::Tristate>(nts::Tristate(nts::UNDEFINED)));
 }
 
@@ -38,7 +38,7 @@ std::shared_ptr<nts::Tristate> Chipset::getPinPtr(int index)
 }
 
 void	Chipset::setPinPtr(int index, std::shared_ptr<nts::Tristate> status)
-{	
+{
 	this->_pin_status[index] = status;
 }
 

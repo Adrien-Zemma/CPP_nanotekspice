@@ -10,6 +10,7 @@
 C_conter::C_conter()
 {
 	this->_type = nts::CHIPSETS;
+	this->_pinMax = 16;
 }
 
 nts::Tristate C_conter::calculate(size_t index)

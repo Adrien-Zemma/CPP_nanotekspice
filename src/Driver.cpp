@@ -13,7 +13,7 @@ namespace loop
 	void	loopStatus(int sig);
 }
 
-Driver::Driver()
+Driver::Driver(char **arg)
 {
 	this->_tab_function["loop"] = &Driver::loop;
 	this->_tab_function["exit"] = &Driver::_exit;
@@ -25,6 +25,7 @@ Driver::Driver()
 	std::signal(SIGINT, loop::loopStatus);
 	_clock = nts::TRUE;
 	_exit_status = false;
+	_init(arg[1], arg);
 }
 
 Driver::~Driver()
@@ -82,8 +83,7 @@ void	Driver::readAv(char **av)
 		tmp.push_back(av[i]);
 	if (tmp.size() < 2)
 		return ;
-	for (size_t i = 2; i < tmp.size(); i++)
-	{
+	for (size_t i = 2; i < tmp.size(); i++){
 		_commande = tmp[i];
 		setValue();
 	}
@@ -99,7 +99,8 @@ void	Driver::_init(char *file, char **av)
 	std::vector<std::pair<std::string, std::string>> *chipset;
 	chipset = parse.getChipset();
 	for (auto &el: *chipset) {
-		if (el.first == "input" || el.first == "true" || el.first == "false")
+		if (el.first == "input" || el.first == "true"
+		|| el.first == "false")
 			this->_tab_input.push_back(std::unique_ptr
 				<nts::IComponent>(new Pin(el.first, el.second)));
 		else if (el.first == "output")
@@ -107,7 +108,7 @@ void	Driver::_init(char *file, char **av)
 				<nts::IComponent>(new Pin(el.second)));
 		else if (isAChipset(el.first))
 			this->_tab_chipset.push_back(chipsetFactory(el.first,
-				 el.second));
+				el.second));
 	}
 	this->makeLink();
 	this->readAv(av);
@@ -145,7 +146,7 @@ void	Driver::shell()
 		return ;
 	do {
 		std::cout << "> ";
-    		getline(std::cin, _commande);
+		getline(std::cin, _commande);
 		setValue();
 		for(auto &el : _tab_function)
 			if (el.first == this->_commande)
@@ -229,11 +230,12 @@ void	Driver::checkLinks()
 
 void	Driver::makeLink()
 {
-	std::vector<std::pair 
-		<std::pair<std::string, size_t>, 
-		std::pair<std::string, size_t>>>	*tmp = this->parse.getLink();
+	std::vector<std::pair
+		<std::pair<std::string, size_t>,
+		std::pair<std::string, size_t>>>
+		*tmp = this->parse.getLink();
 	for (auto &el: *tmp)
-		if (getComponentFromNameBool(el.first.first) 
+		if (getComponentFromNameBool(el.first.first)
 		&& getComponentFromNameBool(el.second.first))
 		getComponentFromName(el.first.first).setLink(el.first.second,
 		getComponentFromName(el.second.first), el.second.second);
@@ -315,7 +317,7 @@ std::unique_ptr<nts::IComponent>	Driver::creat4069(const std::string
 	(void) value;
 	return std::unique_ptr<nts::IComponent>(new C_invert());
 }
-std::unique_ptr<nts::IComponent>	Driver::creat4071(const std::string 
+std::unique_ptr<nts::IComponent>	Driver::creat4071(const std::string
 	&value) const noexcept
 {
 	(void) value;
