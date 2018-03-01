@@ -190,6 +190,8 @@ void	Driver::_exit()
 
 void	Driver::display()
 {
+	if (_exit_status == true)
+		return ;
 	for (auto &el: this->_tab_output)
 		el->dump();
 }
@@ -204,6 +206,8 @@ void	Driver::reverseClock()
 
 void	Driver::simulate()
 {
+	if (_exit_status == true)
+		return ;
 	for (auto &el : this->_tab_chipset)
 		for(size_t i = el->getPinMax(); i >= 1; i--)
 			el->compute(i);
