@@ -6,6 +6,7 @@
 */
 
 #include "Pin.hpp"
+#include "Driver.hpp"
 
 Pin::Pin(std::string name)
 {
@@ -21,7 +22,7 @@ Pin::Pin(std::string value, std::string name)
 {
 	this->_name = name;
 	this->_type = nts::PIN;
-	this->_value = (value == "true") ? nts::TRUE : nts::FALSE;
+	this->_value = Driver::stringToTristate(value);
 	_pin_status.push_back(std::make_shared<nts::Tristate>
 		(nts::Tristate(nts::UNDEFINED)));
 	_pin_status.push_back(std::make_shared<nts::Tristate>

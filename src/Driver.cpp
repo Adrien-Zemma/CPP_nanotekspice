@@ -76,9 +76,20 @@ bool	Driver::isAChipset(std::string name)
 	return false;
 }
 
+void	Driver::checkUndefined(std::unique_ptr<nts::IComponent> &el)
+{
+	if (el.get()->getPinValue(1) == nts::UNDEFINED)
+	{
+		std::cerr << el.get()->getName() << " is UNDEFINED" << std::endl;
+		this->_exit_status = true;
+	}
+}
+
 void	Driver::readAv(char **av)
 {
 	std::vector<std::string> tmp;
+	for (auto &el: this->_tab_input)
+		el.get()->setPinValue(1, el.get()->getValue());
 	for (size_t i = 0; av[i] != NULL; i++)
 		tmp.push_back(av[i]);
 	if (tmp.size() < 2)
@@ -89,7 +100,7 @@ void	Driver::readAv(char **av)
 	}
 	_commande = "";
 	for (auto &el: this->_tab_input)
-		el.get()->setPinValue(1, el.get()->getValue());
+		checkUndefined(el);
 }
 
 void	Driver::_init(char *file, char **av)
@@ -174,7 +185,6 @@ void	Driver::loop()
 
 void	Driver::_exit()
 {
-	this->display();
 	_exit_status = true;
 }
 
@@ -208,7 +218,7 @@ void	Driver::dump()
 		el->dump();
 }
 
-nts::Tristate	Driver::stringToTristate(const std::string &value) const
+nts::Tristate	Driver::stringToTristate(const std::string &value)
 {
 	if (value == "TRUE" || value == "true")
 		return nts::TRUE;

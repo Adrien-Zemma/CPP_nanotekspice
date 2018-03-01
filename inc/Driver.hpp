@@ -39,6 +39,7 @@ public:
 	void	shell();
 	void	_init(char *file, char **av);
 	Parse	parse;
+	static nts::Tristate	stringToTristate(const std::string &value);
 private:
 	std::unique_ptr<nts::IComponent>	creat4001(const std::string
 		&value) const noexcept;
@@ -80,12 +81,12 @@ private:
 	void	setValue();
 	void	reverseClock();
 	void	readAv(char **av);
-	nts::Tristate	stringToTristate(const std::string &value) const;
 	void	makeLink2(std::pair <std::pair<std::string, size_t>, 
 	std::pair<std::string, size_t>> link, 
 	std::unique_ptr<nts::IComponent> &chipset);
 	nts::IComponent	&getComponentFromName(std::string name);
 	bool	getComponentFromNameBool(std::string name);
+	void	checkUndefined(std::unique_ptr<nts::IComponent> &el);
 	void	checkLinks();
 	std::unique_ptr<nts::IComponent>	chipsetFactory(std::string type,
 		std::string name);

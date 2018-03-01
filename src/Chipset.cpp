@@ -81,7 +81,7 @@ void	Chipset::dump() const
 	}
 	else {
 		for (size_t i = 1; i <= this->_pinMax; i++){
-			std::cout << _name << ":" << i << "=";
+			std::cout << _name << " : " << i << "\t= ";
 			std::cout << *this->_pin_status[i].get() << std::endl;
 		}
 	}
