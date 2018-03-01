@@ -27,7 +27,7 @@ SRCS	=	./src/Chipset.cpp \
 		./src/composents/C_register.cpp \
 		./src/composents/C_rom.cpp \
 		./src/composents/C_xor.cpp \
-		./src/parsing/Parse.cpp \
+		./src/Parse.cpp \
 		./src/main.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
