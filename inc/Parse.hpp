@@ -48,6 +48,8 @@ private:
 	void append_line(std::string line);
 	int manage_error() const;
 	bool find_elem(const std::string value) const;
+	void append_chipsets(auto elems);
+	void append_links(auto elems);
 
 	std::vector<std::pair<std::string, std::string>>		*_chipsets;
 	std::vector<std::pair<std::pair

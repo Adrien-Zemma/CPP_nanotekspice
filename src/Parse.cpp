@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** cpp_nanotekspice
 ** File description:
-** 
+**
 */
 
 #include "Parse.hpp"
@@ -41,7 +41,7 @@ int	Parse::read()
 }
 
 std::vector<std::pair<std::pair
-		<std::string, size_t>, 
+		<std::string, size_t>,
 		std::pair<std::string, size_t>>>	*Parse::getLink()
 {
 	return _links;
@@ -71,33 +71,42 @@ int	Parse::read(std::string file)
 	return (manage_error());
 }
 
+void Parse::append_chipsets(auto elems)
+{
+	if (elems.size() == 2)
+			_chipsets->push_back(std::pair<std::string,std::string>
+				(elems[0], elems[1]));
+}
+
+void Parse::append_links(auto elems)
+{
+	if (elems.size() == 2) {
+		std::pair<std::string, size_t> first;
+		std::pair<std::string, size_t> second;
+		auto sub_elems = split_args(elems[0]);
+		if (sub_elems.size() == 2)
+			first = std::make_pair(sub_elems[0],
+				std::stoi(sub_elems[1]));
+		sub_elems = split_args(elems[1]);
+		if (sub_elems.size() == 2)
+			second = std::make_pair(sub_elems[0],
+				std::stoi(sub_elems[1]));
+		_links->push_back(std::pair<std::pair<std::string,
+		size_t>, std::pair<std::string, size_t>>(first, second));
+	}
+
+}
+
 void	Parse::append_line(std::string line)
 {
 	auto elems = split_line(line);
 
 	switch(_title) {
 		case CHIPSETS:
-		if (elems.size() == 2)
-			_chipsets->push_back(std::pair<std::string,std::string>
-				(elems[0], elems[1]));
+		append_chipsets(elems);
 		break;
 		case LINKS:
-		if (elems.size() == 2) {
-			std::pair<std::string, size_t> first;
-			std::pair<std::string, size_t> second;
-			auto sub_elems = split_args(elems[0]);
-			if (sub_elems.size() == 2)
-				first = std::make_pair(sub_elems[0],
-					std::stoi(sub_elems[1]));
-			sub_elems = split_args(elems[1]);			
-			if (sub_elems.size() == 2)
-				second = std::make_pair(sub_elems[0],
-					std::stoi(sub_elems[1]));
-			_links->push_back(std::pair<std::pair<std::string, size_t>,
-				std::pair<std::string, size_t>>(first, second));
-		}
-		break;
-		default:
+		append_links(elems);
 		break;
 	}
 }
@@ -199,7 +208,7 @@ void	Parse::removeSpaces(std::string &input)
 int	Parse::manage_error() const
 {
 	for (const auto &it : *_links) {
-		if (!find_elem(it.first.first) || 
+		if (!find_elem(it.first.first) ||
 			!find_elem(it.second.first)) {
 			std::cerr << "Chipset " << it.first.first;
 			std::cout << " not declared" << std::endl;
@@ -213,7 +222,7 @@ void	Parse::dumpChipsets() const
 {
 	std::cout << "Dump Chipsets" << std::endl;
 	for (const auto &it : *_chipsets) {
-        	std::cout << it.first << " => " << it.second << std::endl;
+		std::cout << it.first << " => " << it.second << std::endl;
 	}
 }
 
