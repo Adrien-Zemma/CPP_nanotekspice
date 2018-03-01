@@ -31,6 +31,7 @@ public:
 	void	setName(std::string);
 	void	dump() const;
 	void	dumpPin() const;
+	nts::Tristate	getValue();
 	nts::Type	getType();
 protected:
 	std::vector<std::shared_ptr<nts::Tristate>>	_pin_status;
@@ -38,6 +39,7 @@ protected:
 	nts::Tristate					_clock;
 	std::string					_name;
 	nts::Type					_type;
+	nts::Tristate 					_value = nts::UNDEFINED;
 	size_t						_pinMax = 14;
 };
 

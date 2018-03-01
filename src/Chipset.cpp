@@ -55,9 +55,9 @@ void	Chipset::setPinValue(int index, nts::Tristate value)
 void	Chipset::setPinValue(int index, std::string value)
 {
 	if (value == "1")
-		*this->_pin_status[index].get() = nts::FALSE;
-	else if (value == "0")
 		*this->_pin_status[index].get() = nts::TRUE;
+	else if (value == "0")
+		*this->_pin_status[index].get() = nts::FALSE;
 	else
 		*this->_pin_status[index].get() = nts::UNDEFINED;
 }
@@ -98,13 +98,18 @@ std::string 	Chipset::getName()
 	return this->_name;
 }
 
+nts::Tristate	Chipset::getValue()
+{
+	return this->_value;
+}
+
 std::ostream &operator<<(std::ostream &s, const nts::Tristate &o)
 {
 	if (o == nts::UNDEFINED)
-		return  s << -1;
+		return  s << 'U';
 	else if (o == nts::TRUE)
-		return s << 0;
-	else if (o == nts::FALSE)
 		return s << 1;
+	else if (o == nts::FALSE)
+		return s << 0;
 }
 

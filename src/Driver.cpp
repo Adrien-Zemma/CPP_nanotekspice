@@ -88,6 +88,8 @@ void	Driver::readAv(char **av)
 		setValue();
 	}
 	_commande = "";
+	for (auto &el: this->_tab_input)
+		el.get()->setPinValue(1, el.get()->getValue());
 }
 
 void	Driver::_init(char *file, char **av)
@@ -97,9 +99,9 @@ void	Driver::_init(char *file, char **av)
 	std::vector<std::pair<std::string, std::string>> *chipset;
 	chipset = parse.getChipset();
 	for (auto &el: *chipset) {
-		if (el.first == "input")
+		if (el.first == "input" || el.first == "true" || el.first == "false")
 			this->_tab_input.push_back(std::unique_ptr
-				<nts::IComponent>(new Pin(el.second)));
+				<nts::IComponent>(new Pin(el.first, el.second)));
 		else if (el.first == "output")
 			this->_tab_output.push_back(std::unique_ptr
 				<nts::IComponent>(new Pin(el.second)));
