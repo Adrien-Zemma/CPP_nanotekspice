@@ -11,24 +11,19 @@ C_invert::C_invert()
 {
 	this->_type = nts::CHIPSETS;
 }
-void	C_invert::_invert(size_t index, size_t out)
+void	C_invert::_invert(size_t index, int out)
 {
-	if (index % 2 == 0)
-		index++;
-	if (index % 2 == 1)
-		index--;
-	if (*_pin_status[index].get() == nts::TRUE)
-		*_pin_status[out].get() = nts::FALSE;
-	else if (*_pin_status[index].get() == nts::FALSE)
-		*_pin_status[out].get() = nts::TRUE;
-	else if (*_pin_status[index].get() == nts::UNDEFINED)
-		*_pin_status[out].get() = nts::UNDEFINED;
+	if (*this->_pin_status[index + out].get() == nts::TRUE)
+		*this->_pin_status[index].get() = nts::FALSE;
+	else if (*this->_pin_status[index + out].get() == nts::FALSE)
+		*this->_pin_status[index].get() = nts::TRUE;
 }
 
-nts::Tristate C_invert::calculate(size_t index)
+nts::Tristate C_invert::calculate(size_t idx)
 {
-	for (size_t i = 1; i <= _pinMax; i++)
-		if (index == i)
-			_invert(i, index);
-	return *this->_pin_status[index];
+	if (idx == 2 || idx == 4 || idx == 6)
+		_invert(idx, -1);
+	else if (idx == 12 || idx == 10 || idx == 8)
+		_invert(idx, 1);
+	return *this->_pin_status[idx].get();
 }

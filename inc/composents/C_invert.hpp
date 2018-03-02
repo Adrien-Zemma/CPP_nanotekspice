@@ -16,7 +16,7 @@ public:
 	C_invert();
 private:
 	nts::Tristate calculate(size_t index);
-	void _invert(size_t index, size_t out);
+	void _invert(size_t index, int out);
 };
 
 #endif /* !C_INVERT_HPP_ */

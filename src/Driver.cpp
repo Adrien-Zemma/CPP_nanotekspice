@@ -80,7 +80,8 @@ void	Driver::checkUndefined(std::unique_ptr<nts::IComponent> &el)
 {
 	if (el.get()->getPinValue(1) == nts::UNDEFINED)
 	{
-		std::cerr << el.get()->getName() << " is UNDEFINED" << std::endl;
+		std::cerr << el.get()->getName() << " is UNDEFINED";
+		std::cerr << std::endl;
 		this->_exit_status = true;
 	}
 }
@@ -113,10 +114,10 @@ void	Driver::_init(char *file, char **av)
 		if (el.first == "input" || el.first == "true"
 		|| el.first == "false")
 			this->_tab_input.push_back(std::unique_ptr
-				<nts::IComponent>(new Pin(el.first, el.second)));
+			<nts::IComponent>(new Pin(el.first, el.second)));
 		else if (el.first == "output")
 			this->_tab_output.push_back(std::unique_ptr
-				<nts::IComponent>(new Pin(el.second)));
+			<nts::IComponent>(new Pin(el.second)));
 		else if (isAChipset(el.first))
 			this->_tab_chipset.push_back(chipsetFactory(el.first,
 				el.second));
@@ -159,7 +160,7 @@ void	Driver::shell()
 		std::cout << "> ";
 		getline(std::cin, _commande);
 		setValue();
-		for(auto &el : _tab_function)
+		for (auto &el : _tab_function)
 			if (el.first == this->_commande)
 				(this->*el.second)();
 		if (_exit_status == true)
@@ -178,7 +179,7 @@ void	loop::loopStatus(int sig)
 void	Driver::loop()
 {
 	loop::loopStatus(0);
-	while(loop::gSignalStatus)
+	while (loop::gSignalStatus)
 		this->simulate();
 	loop::loopStatus(0);
 }
@@ -209,7 +210,7 @@ void	Driver::simulate()
 	if (_exit_status == true)
 		return ;
 	for (auto &el : this->_tab_chipset)
-		for(size_t i = el->getPinMax(); i >= 1; i--)
+		for (size_t i = el->getPinMax(); i >= 1; i--)
 			el->compute(i);
 	reverseClock();
 }
@@ -218,7 +219,7 @@ void	Driver::dump()
 {
 	for (auto &el: this->_tab_input)
 		el->dump();
-	for(auto &el: this->_tab_chipset)
+	for (auto &el: this->_tab_chipset)
 		el->dump();
 }
 
@@ -236,7 +237,8 @@ void	Driver::checkLinks()
 	for (auto &el : this->_tab_output) {
 		if (el->getPinPtr(1).use_count() < 3) {
 			std::cerr << "Output ‘"<< el->getName();
-			std::cerr << "’ is not linked to anything." << std::endl;
+			std::cerr << "’ is not linked to anything.";
+			std::cerr << std::endl;
 			_exit_status = true;
 		}
 	}
@@ -258,13 +260,13 @@ void	Driver::makeLink()
 
 nts::IComponent	&Driver::getComponentFromName(std::string name)
 {
-	for(auto &el: this->_tab_input)
+	for (auto &el: this->_tab_input)
 		if (el->getName() == name)
 			return *el;
-	for(auto &el: this->_tab_output)
+	for (auto &el: this->_tab_output)
 		if (el->getName() == name)
 			return *el;
-	for(auto &el: this->_tab_chipset)
+	for (auto &el: this->_tab_chipset)
 		if (el->getName() == name)
 			return *el;
 	return *this->_tab_chipset[0];
@@ -272,13 +274,13 @@ nts::IComponent	&Driver::getComponentFromName(std::string name)
 
 bool	Driver::getComponentFromNameBool(std::string name)
 {
-	for(auto &el: this->_tab_input)
+	for (auto &el: this->_tab_input)
 		if (el->getName() == name)
 			return true;
-	for(auto &el: this->_tab_output)
+	for (auto &el: this->_tab_output)
 		if (el->getName() == name)
 			return true;
-	for(auto &el: this->_tab_chipset)
+	for (auto &el: this->_tab_chipset)
 		if (el->getName() == name)
 			return true;
 	return false;
@@ -300,18 +302,19 @@ std::unique_ptr<nts::IComponent>	Driver::creat4011(const std::string
 	&value) const noexcept
 {
 	(void) value;
-	 return std::unique_ptr<nts::IComponent>(new C_nand());
+	return std::unique_ptr<nts::IComponent>(new C_nand());
 }
 std::unique_ptr<nts::IComponent>	Driver::creat4013(const std::string
 &value) const noexcept
 {
-	 return std::unique_ptr<nts::IComponent> (new C_flip_flop(stringToTristate(value)));
+	 return std::unique_ptr<nts::IComponent>
+	 (new C_flip_flop(stringToTristate(value)));
 }
 std::unique_ptr<nts::IComponent>	Driver::creat4017(const std::string
 	&value) const noexcept
 {
 	(void) value;
-	 return std::unique_ptr<nts::IComponent>(new C_johnson());
+	return std::unique_ptr<nts::IComponent>(new C_johnson());
 }
 std::unique_ptr<nts::IComponent>	Driver::creat4030(const std::string
 	&value) const noexcept

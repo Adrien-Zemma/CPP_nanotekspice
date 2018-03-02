@@ -15,6 +15,7 @@ class C_nand: public Chipset
 public:
 	C_nand();
 private:
+	void C_nand::_nand(size_t idx1, size_t idx2, size_t out);
 	nts::Tristate calculate(size_t index);
 };
 

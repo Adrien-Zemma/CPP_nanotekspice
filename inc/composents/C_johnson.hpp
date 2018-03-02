@@ -15,6 +15,8 @@ class C_johnson: public Chipset
 public:
 	C_johnson();
 private:
+	size_t _nb_clock = 0;
+	std::vector<std::vector<nts::Tristate>> table;
 	nts::Tristate calculate(size_t index);
 };
 

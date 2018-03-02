@@ -1,9 +1,9 @@
 .chipsets:
-input b
 input a
-output ss
-4081 and
+input b
+output s
+4011	lol
 .links:
-b:1	and:1
-a:1	and:2
-s:1	and:3
+a:1	lol:1
+b:1	lol:2
+s:1	lol:3

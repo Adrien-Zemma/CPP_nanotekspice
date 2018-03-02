@@ -10,7 +10,8 @@
 Chipset::Chipset()
 {
 	for (size_t i = 0; i <= this->_pinMax ; i++)
-		this->_pin_status.push_back(std::make_shared<nts::Tristate>(nts::Tristate(nts::UNDEFINED)));
+		this->_pin_status.push_back(std::make_shared<nts::Tristate>
+			(nts::Tristate(nts::UNDEFINED)));
 }
 
 Chipset::~Chipset()
@@ -112,4 +113,3 @@ std::ostream &operator<<(std::ostream &s, const nts::Tristate &o)
 	else if (o == nts::FALSE)
 		return s << 0;
 }
-
