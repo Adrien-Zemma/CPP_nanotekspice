@@ -1,5 +1,7 @@
 .chipsets:
 clock a
+4081 and
 output s
 .links:
-a:1	s:1
+a:1 and:1
+and:1	s:1

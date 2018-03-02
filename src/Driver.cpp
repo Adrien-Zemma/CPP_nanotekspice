@@ -147,8 +147,14 @@ void	Driver::setValue()
 	for (auto &it : args)
 		Parse::removeSpaces(it);
 	if (args.size() == 2) {
-		if (getComponentFromName(args[0]).getType() == nts::PIN)
+		if (getComponentFromNameBool(args[0])  
+		&& getComponentFromName(args[0]).getType() == nts::PIN)
 			getComponentFromName(args[0]).setPinValue(1, args[1]);
+		else 
+		{
+			_exit_status = true;
+			std::cerr << args[0] << " invalid" << std::endl;
+		}
 	}
 }
 
