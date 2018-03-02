@@ -112,7 +112,7 @@ void	Driver::_init(char *file, char **av)
 	chipset = parse.getChipset();
 	for (auto &el: *chipset) {
 		if (el.first == "input" || el.first == "true"
-			|| el.first == "false")
+			|| el.first == "false" || el.first == "clock")
 			this->_tab_input.push_back(std::unique_ptr
 			<nts::IComponent>(new Pin(el.first, el.second)));
 		else if (el.first == "output")
@@ -150,8 +150,7 @@ void	Driver::setValue()
 		if (getComponentFromNameBool(args[0])  
 		&& getComponentFromName(args[0]).getType() == nts::PIN)
 			getComponentFromName(args[0]).setPinValue(1, args[1]);
-		else 
-		{
+		else {
 			_exit_status = true;
 			std::cerr << args[0] << " invalid" << std::endl;
 		}
