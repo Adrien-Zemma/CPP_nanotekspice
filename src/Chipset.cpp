@@ -9,6 +9,7 @@
 
 Chipset::Chipset()
 {
+	_pinMax = 25;
 	for (size_t i = 0; i <= this->_pinMax ; i++)
 		this->_pin_status.push_back(std::make_shared<nts::Tristate>
 			(nts::Tristate(nts::UNDEFINED)));
@@ -35,6 +36,8 @@ void	Chipset::setName(std::string name)
 
 std::shared_ptr<nts::Tristate> Chipset::getPinPtr(int index)
 {
+	std::cout << _name <<"\t"<<index << std::endl;
+	std::cout << (_pin_status[index] == nullptr ? "C'est null" : "Wala je sais pas ce qui se passe") << std::endl;
 	return _pin_status[index];
 }
 
