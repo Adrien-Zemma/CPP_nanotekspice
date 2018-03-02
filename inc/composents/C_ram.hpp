@@ -15,7 +15,7 @@ class C_ram: public Chipset
 public:
 	C_ram();
 private:
-	nts::Tristate calculate(size_t index);
+	nts::Tristate calculate(const size_t &index) noexcept;
 };
 
 #endif /* !C_RAM_HPP_ */

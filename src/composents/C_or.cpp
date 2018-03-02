@@ -13,7 +13,7 @@ C_or::C_or()
 	this->_type = nts::CHIPSETS;
 }
 
-nts::Tristate C_or::calculate(size_t index)
+nts::Tristate C_or::calculate(const size_t &index) noexcept
 {
 	switch (index)
 	{

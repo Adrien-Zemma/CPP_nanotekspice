@@ -8,7 +8,7 @@
 #include "Pin.hpp"
 #include "Driver.hpp"
 
-Pin::Pin(std::string name)
+Pin::Pin(const std::string &name) noexcept
 {
 	this->_name = name;
 	this->_type = nts::PIN;
@@ -18,7 +18,7 @@ Pin::Pin(std::string name)
 		(nts::Tristate(nts::UNDEFINED)));
 }
 
-Pin::Pin(std::string value, std::string name)
+Pin::Pin(const std::string &value, const std::string &name) noexcept
 {
 	this->_name = name;
 	this->_type = nts::PIN;
@@ -29,7 +29,7 @@ Pin::Pin(std::string value, std::string name)
 		(nts::Tristate(nts::UNDEFINED)));
 }
 
-nts::Tristate	Pin::calculate(size_t pin)
+nts::Tristate	Pin::calculate(const size_t &pin) noexcept
 {
 	return *this->_pin_status[pin].get();
 }

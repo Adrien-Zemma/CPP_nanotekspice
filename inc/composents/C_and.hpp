@@ -14,7 +14,7 @@ class C_and: public Chipset
 {
 public:
 	C_and();
-	nts::Tristate calculate(size_t index);
+	nts::Tristate calculate(const size_t &index) noexcept;
 private:
 	void _and(size_t index, size_t index2, size_t out);
 };

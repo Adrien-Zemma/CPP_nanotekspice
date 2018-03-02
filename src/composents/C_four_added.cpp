@@ -12,7 +12,7 @@ C_four_added::C_four_added()
 	this->_type = nts::CHIPSETS;
 }
 
-nts::Tristate C_four_added::calculate(size_t index)
+nts::Tristate C_four_added::calculate(const size_t &index) noexcept
 {
 	return nts::UNDEFINED;
 }

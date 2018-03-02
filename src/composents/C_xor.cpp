@@ -23,7 +23,7 @@ void	C_xor::_xor(size_t index, size_t index2, size_t out)
 		*_pin_status[out].get() = nts::FALSE;
 }
 
-nts::Tristate C_xor::calculate(size_t index)
+nts::Tristate C_xor::calculate(const size_t &index) noexcept
 {
 	switch (index)
 	{

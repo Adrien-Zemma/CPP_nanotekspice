@@ -7,7 +7,7 @@
 
 #include "Chipset.hpp"
 
-Chipset::Chipset()
+Chipset::Chipset() noexcept
 {
 	_pinMax = 25;
 	for (size_t i = 0; i <= this->_pinMax ; i++)
@@ -19,42 +19,42 @@ Chipset::~Chipset()
 {
 }
 
-nts::Type	Chipset::getType()
+nts::Type	Chipset::getType() const noexcept
 {
 	return this->_type;
 }
 
-nts::Tristate	Chipset::compute(std::size_t pin)
+nts::Tristate	Chipset::compute(const std::size_t &pin) noexcept
 {
 	return this->calculate(pin);
 }
 
-void	Chipset::setName(std::string name)
+void	Chipset::setName(const std::string &name) noexcept
 {
 	this->_name = name;
 }
 
-std::shared_ptr<nts::Tristate> Chipset::getPinPtr(int index)
+std::shared_ptr<nts::Tristate> Chipset::getPinPtr(const int &index) const noexcept
 {	
 	return _pin_status[index];
 }
 
-void	Chipset::setPinPtr(int index, std::shared_ptr<nts::Tristate> status)
+void	Chipset::setPinPtr(const int &index, std::shared_ptr<nts::Tristate> status) noexcept
 {
 	this->_pin_status[index] = status;
 }
 
-nts::Tristate	Chipset::getPinValue(int index)
+nts::Tristate	Chipset::getPinValue(const int &index) const noexcept
 {
 	return *this->_pin_status[index].get();
 }
 
-void	Chipset::setPinValue(int index, nts::Tristate value)
+void	Chipset::setPinValue(const int &index, const nts::Tristate &value) noexcept
 {
 	*this->_pin_status[index].get() = value;
 }
 
-void	Chipset::setPinValue(int index, std::string value)
+void	Chipset::setPinValue(const int &index, const std::string &value) noexcept
 {
 	if (value == "1")
 		*this->_pin_status[index].get() = nts::TRUE;
@@ -64,18 +64,18 @@ void	Chipset::setPinValue(int index, std::string value)
 		*this->_pin_status[index].get() = nts::UNDEFINED;
 }
 
-size_t	Chipset::getPinMax()
+size_t	Chipset::getPinMax() const noexcept
 {
 	return this->_pinMax;
 }
 
-void	Chipset::dumpPin() const
+void	Chipset::dumpPin() const noexcept
 {
 	std::cout << this->_name << "=" << *this->_pin_status[1].get();
 	std::cout << std::endl;
 }
 
-void	Chipset::dump() const
+void	Chipset::dump() const noexcept
 {
 	if (_type == nts::PIN) {
 		this->dumpPin();
@@ -89,18 +89,18 @@ void	Chipset::dump() const
 	}
 }
 
-void	Chipset::setLink (std::size_t pin, nts::IComponent &other,
-	std::size_t otherPin)
+void	Chipset::setLink (const std::size_t &pin, nts::IComponent &other,
+	const std::size_t &otherPin) noexcept
 {
 	this->setPinPtr(pin, other.getPinPtr(otherPin));
 }
 
-std::string 	Chipset::getName()
+std::string 	Chipset::getName() const noexcept
 {
 	return this->_name;
 }
 
-nts::Tristate	Chipset::getValue()
+nts::Tristate	Chipset::getValue() const noexcept
 {
 	return this->_value;
 }

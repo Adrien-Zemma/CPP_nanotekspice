@@ -16,7 +16,7 @@ public:
 	C_or();
 private:
 	void _or(size_t index, size_t index2, size_t out);
-	nts::Tristate calculate(size_t index);
+	nts::Tristate calculate(const size_t &index) noexcept;
 };
 
 

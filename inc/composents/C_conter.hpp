@@ -15,7 +15,7 @@ class C_conter: public Chipset
 public:
 	C_conter();
 private:
-	nts::Tristate calculate(size_t index);
+	nts::Tristate calculate(const size_t &index) noexcept;
 };
 
 #endif /* !C_CONTER_HPP_ */

@@ -13,11 +13,11 @@ C_johnson::C_johnson()
 }
 
 
-nts::Tristate C_johnson::calculate(size_t index)
+nts::Tristate C_johnson::calculate(const size_t &index) noexcept
 {
 	/*
 	faire un tableau de pointer sur fonction pour choisire quelle fonctin en fonction de quelle output
 	*/
-	index = index;
+	(void) index;
 	return nts::UNDEFINED;
 }

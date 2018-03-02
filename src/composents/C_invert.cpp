@@ -19,7 +19,7 @@ void	C_invert::_invert(size_t index, int out)
 		*this->_pin_status[index].get() = nts::TRUE;
 }
 
-nts::Tristate C_invert::calculate(size_t idx)
+nts::Tristate C_invert::calculate(const size_t &idx) noexcept
 {
 	if (idx == 2 || idx == 4 || idx == 6)
 		_invert(idx, -1);

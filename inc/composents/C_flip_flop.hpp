@@ -16,7 +16,7 @@ class C_flip_flop: public Chipset
 public:
 	C_flip_flop(nts::Tristate);
 private:
-	nts::Tristate calculate(size_t index);
+	nts::Tristate calculate(const size_t &index) noexcept;
 	void	_flip_flop(std::vector<int>);
 };
 

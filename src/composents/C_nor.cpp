@@ -28,7 +28,7 @@ void C_nor::_nor(size_t index, size_t index2, size_t out)
 		*_pin_status[out].get() = nts::UNDEFINED;
 }
 
-nts::Tristate	C_nor::calculate(size_t index)
+nts::Tristate	C_nor::calculate(const size_t &index) noexcept
 {
 	switch (index)
 	{

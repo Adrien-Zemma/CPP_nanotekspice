@@ -26,7 +26,7 @@ void C_nand::_nand(size_t index, size_t index2, size_t out)
 		*this->_pin_status[out].get() = nts::TRUE;
 }
 
-nts::Tristate C_nand::calculate(size_t index)
+nts::Tristate C_nand::calculate(const size_t &index) noexcept
 {
 	switch (index)
 	{

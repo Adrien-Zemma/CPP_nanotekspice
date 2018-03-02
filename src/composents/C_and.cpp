@@ -30,7 +30,7 @@ void	C_and::_and(size_t index, size_t index2, size_t out)
 		*this->_pin_status[out].get() = nts::UNDEFINED;
 }
 
-nts::Tristate C_and::calculate(std::size_t index)
+nts::Tristate C_and::calculate(const std::size_t &index) noexcept
 {
 	switch (index)
 	{

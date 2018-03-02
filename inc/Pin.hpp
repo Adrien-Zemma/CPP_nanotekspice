@@ -13,10 +13,10 @@
 class Pin : public Chipset
 {
 public:
-	Pin(std::string name);
-	Pin(std::string value, std::string name);
-	std::shared_ptr<nts::Tristate> getPinPtr(size_t pin);
-	nts::Tristate	calculate(size_t pin);
+	Pin(const std::string &name) noexcept;
+	Pin(const std::string &value, const std::string &name) noexcept;
+	std::shared_ptr<nts::Tristate> getPinPtr(const size_t &pin) const noexcept;
+	nts::Tristate	calculate(const size_t &pin) noexcept;
 	
 private:
 	std::vector<std::shared_ptr<nts::Tristate>>	_pin_status;
