@@ -112,7 +112,7 @@ void	Driver::_init(char *file, char **av)
 	chipset = parse.getChipset();
 	for (auto &el: *chipset) {
 		if (el.first == "input" || el.first == "true"
-		|| el.first == "false")
+			|| el.first == "false")
 			this->_tab_input.push_back(std::unique_ptr
 			<nts::IComponent>(new Pin(el.first, el.second)));
 		else if (el.first == "output")

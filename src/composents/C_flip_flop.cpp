@@ -19,5 +19,6 @@ void	C_flip_flop::_flip_flop(std::vector<int> set)
 
 nts::Tristate C_flip_flop::calculate(size_t index)
 {
+	index = index;
 	return nts::UNDEFINED;
 }
