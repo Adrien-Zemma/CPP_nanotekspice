@@ -35,9 +35,7 @@ void	Chipset::setName(std::string name)
 }
 
 std::shared_ptr<nts::Tristate> Chipset::getPinPtr(int index)
-{
-	std::cout << _name <<"\t"<<index << std::endl;
-	std::cout << (_pin_status[index] == nullptr ? "C'est null" : "Wala je sais pas ce qui se passe") << std::endl;
+{	
 	return _pin_status[index];
 }
 
