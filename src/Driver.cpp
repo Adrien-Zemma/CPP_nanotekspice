@@ -89,8 +89,6 @@ void	Driver::checkUndefined(std::unique_ptr<nts::IComponent> &el)
 void	Driver::readAv(char **av)
 {
 	std::vector<std::string> tmp;
-	for (auto &el: this->_tab_input)
-		el.get()->setPinValue(1, el.get()->getValue());
 	for (size_t i = 0; av[i] != NULL; i++)
 		tmp.push_back(av[i]);
 	if (tmp.size() < 2)
@@ -100,6 +98,8 @@ void	Driver::readAv(char **av)
 		setValue();
 	}
 	_commande = "";
+	for (auto &el: this->_tab_input)
+		el.get()->setPinValue(1, el.get()->getValue());
 	for (auto &el: this->_tab_input)
 		checkUndefined(el);
 }
@@ -113,8 +113,8 @@ void	Driver::_init(char *file, char **av)
 	for (auto &el: *chipset) {
 		if (el.first == "input" || el.first == "true"
 			|| el.first == "false" || el.first == "clock")
-			this->_tab_input.push_back(std::unique_ptr
-			<nts::IComponent>(new Pin(el.first, el.second)));
+				this->_tab_input.push_back(std::unique_ptr
+				<nts::IComponent>(new Pin(el.first, el.second)));
 		else if (el.first == "output")
 			this->_tab_output.push_back(std::unique_ptr
 			<nts::IComponent>(new Pin(el.second)));
@@ -215,8 +215,12 @@ void	Driver::simulate()
 	if (_exit_status == true)
 		return ;
 	for (auto &el : this->_tab_chipset)
-		for (size_t i = el->getPinMax(); i >= 1; i--)
+	{
+		for (size_t i = 1; i <= el->getPinMax(); i++)
 			el->compute(i);
+		for (size_t i = 1; i <= el->getPinMax(); i++)
+			el->compute(i);
+	}
 	reverseClock();
 }
 

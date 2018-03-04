@@ -1,6 +1,8 @@
-test/*
+
+tests/*
 .vscode/*
 *.o
 vgcore*
 nanotekspice
+testbin
 TODO.txt

@@ -74,8 +74,8 @@ int	Parse::read(std::string file)
 void Parse::append_chipsets(auto elems)
 {
 	if (elems.size() == 2)
-			_chipsets->push_back(std::pair<std::string,std::string>
-				(elems[0], elems[1]));
+		_chipsets->push_back(std::pair<std::string,std::string>
+		(elems[0], elems[1]));
 }
 
 void Parse::append_links(auto elems)
@@ -103,10 +103,10 @@ void	Parse::append_line(std::string line)
 
 	switch(_title) {
 		case CHIPSETS:
-		append_chipsets(elems);
+			append_chipsets(elems);
 		break;
 		case LINKS:
-		append_links(elems);
+			append_links(elems);
 		break;
 	}
 }
@@ -224,6 +224,7 @@ void	Parse::dumpChipsets() const
 	for (const auto &it : *_chipsets) {
 		std::cout << it.first << " => " << it.second << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 void	Parse::dumpLinks() const
@@ -235,4 +236,5 @@ void	Parse::dumpLinks() const
 		std::cout << "[" <<it.second.first << " => ";
 		std::cout << it.second.second << "]" << std::endl;
 	}
+	std::cout << std::endl;
 }

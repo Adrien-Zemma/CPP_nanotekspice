@@ -9,6 +9,7 @@
 
 C_nand::C_nand()
 {
+	this->_pinMax = 14;
 	this->_type = nts::CHIPSETS;
 }
 
@@ -33,14 +34,14 @@ nts::Tristate C_nand::calculate(const size_t &index) noexcept
 		case 3:
 			_nand(1, 2, 3);
 		break;
-		case 6:
-			_nand(4, 5, 6);
+		case 4:
+			_nand(6, 5, 4);
 		break;
 		case 10:
 			_nand(9, 8, 10);
 		break;
-		case 13:
-			_nand(11, 12, 13);
+		case 11:
+			_nand(13, 12, 11);
 		break;
 	}
 	return *this->_pin_status[index];

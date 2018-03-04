@@ -10,6 +10,7 @@
 
 C_or::C_or()
 {
+	this->_pinMax = 14;
 	this->_type = nts::CHIPSETS;
 }
 
@@ -39,6 +40,4 @@ void C_or::_or(size_t index, size_t index2, size_t out)
 		*_pin_status[out].get() = nts::TRUE;
 	else if (*_pin_status[index].get() == nts::FALSE && *_pin_status[index2].get() == nts::FALSE)
 		*_pin_status[out].get() = nts::FALSE;
-	else 
-		*_pin_status[out].get() = nts::UNDEFINED;
 }

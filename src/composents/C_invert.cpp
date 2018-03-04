@@ -9,6 +9,7 @@
 
 C_invert::C_invert()
 {
+	this->_pinMax = 14;
 	this->_type = nts::CHIPSETS;
 }
 void	C_invert::_invert(size_t index, int out)

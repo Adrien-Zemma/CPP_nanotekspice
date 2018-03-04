@@ -1,0 +1,29 @@
+# Admiral Business Machines 1954-2042
+# 5 bits nand gate
+
+.chipsets:
+true		a
+true		b
+true		c
+true		d
+true		e
+
+output		s
+40		gate
+4069		inverter
+
+.links:
+b:1		gate:2
+a:1		gate:1
+
+gate:3		gate:13
+gate:4		gate:12
+
+c:1		gate:5
+d:1		gate:6
+
+gate:11		gate:9
+e:1		gate:8
+
+gate:10		inverter:1
+inverter:2	s:1

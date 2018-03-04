@@ -27,6 +27,7 @@ Pin::Pin(const std::string &value, const std::string &name) noexcept
 		(nts::Tristate(nts::UNDEFINED)));
 	_pin_status.push_back(std::make_shared<nts::Tristate>
 		(nts::Tristate(nts::UNDEFINED)));
+	*_pin_status[1].get() = _value;
 }
 
 nts::Tristate	Pin::calculate(const size_t &pin) noexcept
