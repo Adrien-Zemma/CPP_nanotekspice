@@ -7,6 +7,8 @@
 
 NAME	= nanotekspice
 
+NAMETEST = testbin
+
 CXX	= g++
 
 RM	= rm -f
@@ -74,6 +76,7 @@ fclean:
 	@echo -e "\033[1;46m fclean OK \033[0m"
 	@$(RM) $(OBJS)
 	@$(RM) $(OBJSTEST)
+	@$(RM) $(NAMETEST)
 	@$(RM) $(NAME)
 
 re: fclean all
