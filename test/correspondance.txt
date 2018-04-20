@@ -2,14 +2,12 @@
 4008:	C_four_added
 4011:	C_nand
 4013:	C_flip_flop 
-4017:	C_johnson 	//TODO
+4017:	C_johnson 	//TODO:
 4030:	C_xor
-4040:	C_conter 	//TODO
+4040:	C_conter 	//TODO:
 4069:	C_invert
 4071:	C_or
 4081:	C_and
-4094:	C_register 	//TODO
-4514:	C_ram		//TODO
-2716:	C_rom		//TODO
-
-segfault sur la clock
+4094:	C_register 	//TODO:
+4514:	C_ram		//TODO:
+2716:	C_rom		//TODO:

@@ -93,13 +93,13 @@ void	Driver::readAv(char **av)
 		tmp.push_back(av[i]);
 	if (tmp.size() < 2)
 		return ;
+	for (auto &el: this->_tab_input)
+		el.get()->setPinValue(1, el.get()->getValue());
 	for (size_t i = 2; i < tmp.size(); i++){
 		_commande = tmp[i];
 		setValue();
 	}
 	_commande = "";
-	for (auto &el: this->_tab_input)
-		el.get()->setPinValue(1, el.get()->getValue());
 	for (auto &el: this->_tab_input)
 		checkUndefined(el);
 }
